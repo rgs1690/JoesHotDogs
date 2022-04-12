@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0-preview2.22096.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
     <Folder Include="FrontEnd\" />
+    <Folder Include="SqlQueries\" />
   </ItemGroup>
 
 </Project>
