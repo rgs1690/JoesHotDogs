@@ -26,7 +26,7 @@ CREATE TABLE HotDogs (
 
 CREATE TABLE Orders (
 	id varchar (55),
-	userId varchar (255),
+	userId varchar (55),
 	total integer,
 	delivery bit,
 	cardNum integer,
