@@ -1,0 +1,32 @@
+{
+    "1":{
+        "id": "1",
+        "name": "Plain Ol' Hotdog",
+        "description": "Just a plain ass hotdog.",
+        "imageUrl": "https://images.unsplash.com/photo-1576414159775-efef7e09c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    },
+    "2":{
+        "id": "2",
+        "name": "Chilly Dog",
+        "description": "A hotdog with chilly and stuff.",
+        "imageUrl": "https://images.unsplash.com/photo-1576414159775-efef7e09c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    },
+    "3":{
+        "id": "3",
+        "name": "Veggie Dog",
+        "description": "No meat in these dogs.",
+        "imageUrl": "https://images.unsplash.com/photo-1576414159775-efef7e09c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    },
+    "4":{
+        "id": "4",
+        "name": "Chicago Dog",
+        "description": "It's got a pickle on it.",
+        "imageUrl": "https://images.unsplash.com/photo-1576414159775-efef7e09c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    },
+    "5":{
+        "id": "5",
+        "name": "New York Dog",
+        "description": "Are those onions?",
+        "imageUrl": "https://images.unsplash.com/photo-1576414159775-efef7e09c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    }
+}

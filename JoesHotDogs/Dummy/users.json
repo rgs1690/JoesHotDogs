@@ -1,0 +1,23 @@
+{
+    "6": {
+        "id": "6",
+        "firstName": "Bob",
+        "lastName": "Marley",
+        "email": "dontworryaboutathing@gmail.com",
+        "idAdmin": true
+    },
+    "7": {
+        "id": "7",
+        "firstName": "Adam",
+        "lastName": "West",
+        "email": "therealbatman@gmail.com",
+        "idAdmin": false
+    },
+    "8": {
+        "id": "8",
+        "firstName": "Fanny",
+        "lastName": "Fourtoes",
+        "email": "onefelloff@gmail.com",
+        "idAdmin": false
+    }
+}
