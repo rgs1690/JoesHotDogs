@@ -22,5 +22,24 @@ VALUES ('3', 'Veggie Dog', 'No meat in these dogs.', 'https://encrypted-tbn0.gst
 INSERT INTO HotDogs 
 VALUES ('5', 'New York Dog', 'Are those onions?', 'https://thepennywisemama.com/wp-content/uploads/2019/02/newyorkhotdog3-720x720.png');
 
+CREATE TABLE HotDogOrders (
+id varchar(55),
+hotdogID varchar(55),
+orderId varchar(55),
+);
+
+INSERT INTO HotDogOrders
+VALUES ('13','1', '9')
+
+INSERT INTO HotDogOrders
+VALUES ('14','2', '10')
+
+INSERT INTO HotDogOrders
+VALUES ('15','3', '10')
+
+INSERT INTO HotDogOrders
+VALUES ('16','4', '11')
+
+
 SELECT * 
 FROM HotDogs
