@@ -1,6 +1,6 @@
 ﻿namespace JoesHotDogs.Repos
 {
-    public class HotDogsRepository
+    public class OrderRepository
     {
     }
 }
