@@ -17,6 +17,13 @@ DROP TABLE IF EXISTS HotDogs;
 DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Users;
 
+
+CREATE TABLE HotDogOrders (
+id varchar(55),
+hotdogID varchar(55),
+orderId varchar(55),
+);
+
 CREATE TABLE HotDogs (
 	id varchar (55),
 	[name] varchar (255),
@@ -46,6 +53,21 @@ CREATE TABLE Users (
 	email varchar (255),
 	isAdmin bit,
 );
+
+
+
+INSERT INTO HotDogOrders (id, hotdogId, orderId)
+VALUES ('13','1', '9')
+
+INSERT INTO HotDogOrders
+VALUES ('14','2', '10')
+
+INSERT INTO HotDogOrders
+VALUES ('15','3', '10')
+
+INSERT INTO HotDogOrders
+VALUES ('16','4', '11')
+
 
 INSERT INTO HotDogs (id, [name], [description], imageUrl)
 	VALUES ('1', 'Plain Ol Hotdog', 'Just a plain ass hotdog.', 'https://m.media-amazon.com/images/I/71GBQJBNEKL._SX679_.jpg')
@@ -83,3 +105,5 @@ INSERT INTO Users
 
 INSERT INTO Users
 	VALUES  ('8', 'Fanny', 'Fourtoes', 'onefelloff@gmail.com', 0);
+
+	select * from Users
