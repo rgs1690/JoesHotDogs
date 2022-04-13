@@ -34,14 +34,14 @@ CREATE TABLE HotDogs (
 CREATE TABLE Orders (
 	id varchar (55),
 	userId varchar (55),
-	total integer,
+	total bigint,
 	delivery bit,
-	cardNum integer,
+	cardNum bigint,
 	expiration varchar (55),
 	nameOnCard varchar (55),
 	billingZip integer,
 	[address] varchar (55),
-	phone integer,
+	phone bigint,
 	[date] varchar (55),
 	[status] bit,
 );
@@ -87,13 +87,13 @@ INSERT INTO HotDogs
 
 
 INSERT INTO Orders (id, userId, total, delivery, cardNum, expiration, nameOnCard, billingZip, [address], phone, [date], [status]) 
-	VALUES ('9', '2', 10, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, 1649721151035, 1);
+	VALUES ('9', '2', 10, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, '1649721151035', 1);
 
 INSERT INTO Orders 
-	VALUES ('10', '3', 20, 1, 456789123, '05/31', 'Felicia Morris', 34567, '100 Toe Chop Road', 8763452892, 1649721151140, 0);
+	VALUES ('10', '3', 20, 1, 456789123, '05/31', 'Felicia Morris', 34567, '100 Toe Chop Road', 8763452892, '1649721151140', 0);
 
 INSERT INTO Orders 
-	VALUES ('11', 2, 35, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, 1649721151333, 1);
+	VALUES ('11', 2, 35, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, '1649721151333', 1);
 
 
 
@@ -106,4 +106,7 @@ INSERT INTO Users
 INSERT INTO Users
 	VALUES  ('8', 'Fanny', 'Fourtoes', 'onefelloff@gmail.com', 0);
 
-	select * from Users
+--select * from HotDogs
+--select * from HotDogOrders
+--select * from Orders
+--select * from Users

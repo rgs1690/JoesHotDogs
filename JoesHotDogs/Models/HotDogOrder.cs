@@ -1,6 +1,6 @@
 ﻿namespace JoesHotDogs
 {
-    public class HotDogOrders
+    public class HotDogOrder
     {
     }
 }

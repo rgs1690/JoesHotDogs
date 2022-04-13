@@ -1,6 +1,6 @@
 ﻿namespace JoesHotDogs.Models
 {
-    public class Users
+    public class HotDog
     {
     }
 }
