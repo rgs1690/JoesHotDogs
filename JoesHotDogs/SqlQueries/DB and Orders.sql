@@ -106,7 +106,7 @@ INSERT INTO Users
 INSERT INTO Users
 	VALUES  ('8', 'Fanny', 'Fourtoes', 'onefelloff@gmail.com', 0);
 
---select * from HotDogs
---select * from HotDogOrders
---select * from Orders
---select * from Users
+select * from HotDogs
+select * from HotDogOrders
+select * from Orders
+select * from Users
