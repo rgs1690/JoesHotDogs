@@ -1,6 +1,6 @@
 ﻿namespace JoesHotDogs.Repos
 {
-    public interface IOrdersRepository
+    public interface IHotDogRepository
     {
     }
 }
