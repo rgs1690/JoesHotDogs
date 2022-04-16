@@ -23,7 +23,14 @@ namespace JoesHotDogs.Controllers
         // GET: HotDogsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            HotDog hotdog = _hotDogRepo.GetHotDogById(id);
+
+            if (hotdog == null)
+            {
+                return NotFound();
+            }
+
+            return View(hotdog);
         }
 
         // GET: HotDogsController/Create
