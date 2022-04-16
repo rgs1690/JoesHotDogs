@@ -1,83 +1,67 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JoesHotDogs.Models;
+using JoesHotDogs.Repos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JoesHotDogs.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class OrdersController : Controller
     {
-        // GET: OrdersController
-        public ActionResult Index()
+
+        private readonly IOrderRepository _orderRepo;
+
+        public OrdersController(IOrderRepository orderRepo)
         {
-            return View();
+            _orderRepo = orderRepo;
         }
 
-        // GET: OrdersController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public IActionResult GetOrders()
         {
-            return View();
+            List<Order> orders = _orderRepo.GetAllOrders();
+            if (orders == null) return NotFound();
+            return Ok(orders);
         }
 
-        // GET: OrdersController/Create
-        public ActionResult Create()
+        [HttpGet("{id}")]
+        public IActionResult GetOrderById(string id)
         {
-            return View();
+            var match = _orderRepo.GetOrderById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            return Ok(match);
         }
 
-        // POST: OrdersController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult CreateNewOrder(Order newOrder)
         {
-            try
+            if (newOrder == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+            else
             {
-                return View();
+                _orderRepo.CreateOrder(newOrder);
+                return Ok(newOrder);
             }
         }
 
-        // GET: OrdersController/Edit/5
-        public ActionResult Edit(int id)
+
+
+
+
+        [HttpDelete("{id}")]
+        public void Delete(string id)
         {
-            return View();
+            _orderRepo.DeleteOrder(id);
         }
 
-        // POST: OrdersController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: OrdersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: OrdersController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

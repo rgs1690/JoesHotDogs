@@ -9,7 +9,7 @@ namespace JoesHotDogs.Repos
 
         void CreateOrder(Order order);
         void UpdateOrder(Order order);
-        void DeleteOrder(Order order);
+        void DeleteOrder(string id);
         List<Order> GetOrdersByUserId(string UserId);
     }
 }

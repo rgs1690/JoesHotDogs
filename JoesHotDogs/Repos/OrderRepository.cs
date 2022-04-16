@@ -16,6 +16,7 @@ namespace JoesHotDogs.Repos
             _config = config;
         }
 
+      
         public SqlConnection Connection
         {
             get
@@ -32,8 +33,8 @@ namespace JoesHotDogs.Repos
                 {
                     cmd.CommandText = @"
                                       SELECT 
-                                        Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,              Address, Phone, Date, Status
-                                      FROM Orders
+                                        Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip, Address, Phone, Date, Status
+                                      FROM [Order]
                                       ";
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -44,17 +45,16 @@ namespace JoesHotDogs.Repos
                         {
                             Id = reader.GetString(reader.GetOrdinal("Id")),
                             UserId = reader.GetString(reader.GetOrdinal("UserId")),
-                            Total = reader.GetInt32(reader.GetOrdinal("Total")),
+                            Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
-                            CardNum = reader.GetInt32(reader.GetOrdinal("CardNum")),
+                            CardNum = (int)reader.GetInt64(reader.GetOrdinal("CardNum")),
                             Expiration = reader.GetString(reader.GetOrdinal("Expiration")),
                             NameOnCard = reader.GetString(reader.GetOrdinal("NameOnCard")),
                             BillingZip = reader.GetInt32(reader.GetOrdinal("BillingZip")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetInt32(reader.GetOrdinal("Phone")),
-                            Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                            Status = reader.GetBoolean(reader.GetOrdinal("Status"))
-                        };
+                            Phone = (int)reader.GetInt64(reader.GetOrdinal("Phone")),
+                            Date = reader.GetString(reader.GetOrdinal("Date")),
+                            Status = reader.GetBoolean(reader.GetOrdinal("Status")),                        };
 
                         orders.Add(order);
                     }
@@ -75,7 +75,7 @@ namespace JoesHotDogs.Repos
                     cmd.CommandText = @"
                                       SELECT 
                                         Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,              Address, Phone, Date, Status
-                                      FROM Orders
+                                      FROM Order
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -95,7 +95,7 @@ namespace JoesHotDogs.Repos
                             BillingZip = reader.GetInt32(reader.GetOrdinal("BillingZip")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
                             Phone = reader.GetInt32(reader.GetOrdinal("Phone")),
-                            Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                            Date = reader.GetString(reader.GetOrdinal("Date")),
                             Status = reader.GetBoolean(reader.GetOrdinal("Status"))
                         };
 
@@ -162,6 +162,69 @@ namespace JoesHotDogs.Repos
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+        public void DeleteOrder(string id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+				DELETE FROM Order
+				WHERE Id = @id
+				";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
+
+
+        public List<Order> GetOrdersByUserId(string userId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+			    SELECT Id, UserId, Total, Delivery, cardNum,
+				       Expiration, NameOnCard, BillingZip,
+				        Address, Phone, Date, Status
+                FROM Order
+                WHERE UserId = @userId
+			";
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    List<Order> orders = new List<Order>();
+                    while (reader.Read())
+                    {
+                        Order order = new Order()
+                        {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
+                            Total = reader.GetInt32(reader.GetOrdinal("Total")),
+                            Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
+                            CardNum = reader.GetInt32(reader.GetOrdinal("CardNum")),
+                            Expiration = reader.GetString(reader.GetOrdinal("Expiration")),
+                            NameOnCard = reader.GetString(reader.GetOrdinal("NameOnCard")),
+                            BillingZip = reader.GetInt32(reader.GetOrdinal("BillingZip")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            Phone = reader.GetInt32(reader.GetOrdinal("Phone")),
+                            Date = reader.GetString(reader.GetOrdinal("Date")),
+                            Status = reader.GetBoolean(reader.GetOrdinal("Status"))
+                        };
+                        orders.Add(order);
+                    }
+                    reader.Close();
+                    return orders;
+                }
+            }
+
         }
 
     }

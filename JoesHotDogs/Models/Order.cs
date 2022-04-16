@@ -12,7 +12,7 @@
         public int BillingZip {get; set;}
         public string Address { get; set; }
         public int Phone { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public bool Status { get; set; }
     }
    
