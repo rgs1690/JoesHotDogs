@@ -7,6 +7,6 @@ namespace JoesHotDogs.Repos
         List<User> GetUsers();
         void AddUser(User user);
         void UpdateUser(User user);
-        void DeleteUser(Int64 id);
+        void DeleteUser(int id);
     }
 }
