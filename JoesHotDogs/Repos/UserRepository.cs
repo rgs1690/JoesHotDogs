@@ -46,7 +46,7 @@ namespace JoesHotDogs.Repos
                             FirstName = reader.GetString(reader.GetOrdinal("firstName")),
                             LastName = reader.GetString(reader.GetOrdinal("lastName")),
                             Email = reader.GetString(reader.GetOrdinal("email")),
-                            IsAdmin = reader.Get(reader.GetOrdinal("isAdmin"))
+                            IsAdmin = reader.GetBoolean(reader.GetOrdinal("isAdmin"))
                         };
                         users.Add(user);
                     }
