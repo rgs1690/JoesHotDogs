@@ -51,8 +51,24 @@ namespace JoesHotDogs.Controllers
             }
         }
 
+        [HttpPatch]
+        public IActionResult UpdateOrder(Order order)
+        {
+            string id = order.Id;
+            var match = _orderRepo.GetOrderById(id);
 
-
+            if (match == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _orderRepo.UpdateOrder(order);
+                return Ok(order);
+            }
+            
+        }
+    
 
 
         [HttpDelete("{id}")]

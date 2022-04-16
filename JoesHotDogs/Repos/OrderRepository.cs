@@ -74,8 +74,8 @@ namespace JoesHotDogs.Repos
                 {
                     cmd.CommandText = @"
                                       SELECT 
-                                        Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,              Address, Phone, Date, Status
-                                      FROM Order
+                                        Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,Address, Phone, Date, Status
+                                      FROM [Order]
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -85,18 +85,19 @@ namespace JoesHotDogs.Repos
                     {
                         Order order = new Order()
                         {
+
                             Id = reader.GetString(reader.GetOrdinal("Id")),
                             UserId = reader.GetString(reader.GetOrdinal("UserId")),
-                            Total = reader.GetInt32(reader.GetOrdinal("Total")),
+                            Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
-                            CardNum = reader.GetInt32(reader.GetOrdinal("CardNum")),
+                            CardNum = (int)reader.GetInt64(reader.GetOrdinal("CardNum")),
                             Expiration = reader.GetString(reader.GetOrdinal("Expiration")),
                             NameOnCard = reader.GetString(reader.GetOrdinal("NameOnCard")),
                             BillingZip = reader.GetInt32(reader.GetOrdinal("BillingZip")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetInt32(reader.GetOrdinal("Phone")),
+                            Phone = (int)reader.GetInt64(reader.GetOrdinal("Phone")),
                             Date = reader.GetString(reader.GetOrdinal("Date")),
-                            Status = reader.GetBoolean(reader.GetOrdinal("Status"))
+                            Status = reader.GetBoolean(reader.GetOrdinal("Status")),
                         };
 
                         reader.Close();
@@ -116,7 +117,8 @@ namespace JoesHotDogs.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO Order (UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip, Address, Phone, Date, Status)
+                    INSERT INTO [Order] 
+                    (UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip, Address, Phone, Date, Status)
                     OUTPUT INSERTED.ID
                     VALUES (@userId, @total, @delivery, @cardNum, @expiration, @nameOnCard, @billingZip, @address, @phone, @date, @status);
                     ";
@@ -131,15 +133,16 @@ namespace JoesHotDogs.Repos
                     cmd.Parameters.AddWithValue("@address", order.Address);
                     cmd.Parameters.AddWithValue("@phone", order.Phone);
                     cmd.Parameters.AddWithValue("@date", order.Date);
-                    cmd.Parameters.AddWithValue("@status", order.Status);
+                    cmd.Parameters.AddWithValue("@status", true);
 
-                    string id = (string)cmd.ExecuteScalar();
+
+                    string id = cmd.ExecuteScalar().ToString();
 
                     order.Id = id;
                 }
             }
         }
-
+   
         public void UpdateOrder(Order order)
         {
             using (SqlConnection conn = Connection)
@@ -148,7 +151,7 @@ namespace JoesHotDogs.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    UPDATE Order
+                    UPDATE [Order]
                     SET
                         Delivery = @delivery,
                         CardNum = @cardNum,
@@ -159,6 +162,17 @@ namespace JoesHotDogs.Repos
                         Phone = @phone
                     WHERE Id = @id;
                     ";
+
+                    cmd.Parameters.AddWithValue("@id", order.Id);
+                    cmd.Parameters.AddWithValue("@delivery", order.Delivery);
+                    cmd.Parameters.AddWithValue("@cardNum", order.CardNum);
+                    cmd.Parameters.AddWithValue("@expiration", order.Expiration);
+                    cmd.Parameters.AddWithValue("@nameOnCard", order.NameOnCard);
+                    cmd.Parameters.AddWithValue("@billingZip", order.BillingZip);
+                    cmd.Parameters.AddWithValue("@address", order.Address);
+                    cmd.Parameters.AddWithValue("@phone", order.Phone);
+             
+
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -172,7 +186,7 @@ namespace JoesHotDogs.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-				DELETE FROM Order
+				DELETE FROM [Order]
 				WHERE Id = @id
 				";
                     cmd.Parameters.AddWithValue("@id", id);
@@ -205,18 +219,19 @@ namespace JoesHotDogs.Repos
                     {
                         Order order = new Order()
                         {
+
                             Id = reader.GetString(reader.GetOrdinal("Id")),
                             UserId = reader.GetString(reader.GetOrdinal("UserId")),
-                            Total = reader.GetInt32(reader.GetOrdinal("Total")),
+                            Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
-                            CardNum = reader.GetInt32(reader.GetOrdinal("CardNum")),
+                            CardNum = (int)reader.GetInt64(reader.GetOrdinal("CardNum")),
                             Expiration = reader.GetString(reader.GetOrdinal("Expiration")),
                             NameOnCard = reader.GetString(reader.GetOrdinal("NameOnCard")),
                             BillingZip = reader.GetInt32(reader.GetOrdinal("BillingZip")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetInt32(reader.GetOrdinal("Phone")),
+                            Phone = (int)reader.GetInt64(reader.GetOrdinal("Phone")),
                             Date = reader.GetString(reader.GetOrdinal("Date")),
-                            Status = reader.GetBoolean(reader.GetOrdinal("Status"))
+                            Status = reader.GetBoolean(reader.GetOrdinal("Status")),
                         };
                         orders.Add(order);
                     }
@@ -224,6 +239,8 @@ namespace JoesHotDogs.Repos
                     return orders;
                 }
             }
+
+            //Close order
 
         }
 
