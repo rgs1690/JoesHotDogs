@@ -209,7 +209,7 @@ namespace JoesHotDogs.Repos
 			    SELECT Id, UserId, Total, Delivery, cardNum,
 				       Expiration, NameOnCard, BillingZip,
 				        Address, Phone, Date, Status
-                FROM Order
+                FROM [Order]
                 WHERE UserId = @userId
 			";
                     cmd.Parameters.AddWithValue("@userId", userId);

@@ -77,7 +77,16 @@ namespace JoesHotDogs.Controllers
             _orderRepo.DeleteOrder(id);
         }
 
-
+        [HttpGet("orders/{userId}")]
+        public IActionResult GetOrderByUserId(string userId)
+        {
+            var matches = _orderRepo.GetOrdersByUserId(userId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return Ok(matches);
+        }
 
     }
 }
