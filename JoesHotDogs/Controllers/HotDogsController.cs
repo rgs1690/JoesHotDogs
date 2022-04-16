@@ -1,14 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JoesHotDogs.Models;
+using JoesHotDogs.Repos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JoesHotDogs.Controllers
 {
     public class HotDogsController : Controller
     {
+        private readonly IHotDogRepository _hotDogRepo;
+
+        public HotDogsController(IHotDogRepository hotDogRepository)
+        {
+            _hotDogRepo = hotDogRepository;
+        }
         // GET: HotDogsController
         public ActionResult Index()
         {
-            return View();
+            List<HotDog> hotdogs = _hotDogRepo.GetAllHotDogs();
+            return View(hotdogs);
         }
 
         // GET: HotDogsController/Details/5
