@@ -39,7 +39,7 @@ namespace JoesHotDogs.Repos
                     {
                         HotDog hotdog = new HotDog()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             Description = reader.GetString(reader.GetOrdinal("Description")),
                             ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
