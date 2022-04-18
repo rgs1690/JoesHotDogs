@@ -57,6 +57,11 @@ namespace JoesHotDogs.Repos
             }
         }
 
+       // public User GetUserById(int id)
+     //   {
+            // write this one
+     //   } 
+
         public void AddUser(User user)
         {
             using (SqlConnection conn = Connection)
