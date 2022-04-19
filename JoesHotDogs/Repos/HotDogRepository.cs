@@ -51,5 +51,10 @@ namespace JoesHotDogs.Repos
                 }
             }
         }
+
+        public HotDog GetHotDogById(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

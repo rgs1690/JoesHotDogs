@@ -1,29 +1,49 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using JoesHotDogs.Repos;
+using JoesHotDogs.Models;
 
 namespace JoesHotDogs.Controllers
 {
-    public class UsersController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : Controller
     {
-        // GET: UsersController
-        public ActionResult Index()
+        private readonly IUserRepository _userRepo;
+
+        public UserController(IUserRepository userRepository)
         {
-            return View();
+            _userRepo = userRepository;
         }
 
-        // GET: UsersController/Details/5
-        public ActionResult Details(int id)
+
+        //// GET: api/<UserController>
+        //[HttpGet]
+        //public IEnumerable<int> Get()
+        //{
+        //    return new int[] { 1, 2 };
+        //}
+
+        // GET: UserController/5
+        [HttpGet("Id/{id}")]
+        public IActionResult GetUserById(int id)
         {
-            return View();
+            User user = _userRepo.GetUserById(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
-        // GET: UsersController/Create
+        // GET: UserController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UsersController/Create
+        // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +58,13 @@ namespace JoesHotDogs.Controllers
             }
         }
 
-        // GET: UsersController/Edit/5
+        // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: UsersController/Edit/5
+        // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +79,13 @@ namespace JoesHotDogs.Controllers
             }
         }
 
-        // GET: UsersController/Delete/5
+        // GET: UserController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: UsersController/Delete/5
+        // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
