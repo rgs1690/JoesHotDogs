@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace JoesHotDogs.Repos
 {
-    public class HotDogRepository: IHotDogRepository
+    public class HotDogRepository : IHotDogRepository
     {
         private readonly IConfiguration _config;
         public HotDogRepository(IConfiguration config)
