@@ -1,21 +1,38 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JoesHotDogs.Models;
+using JoesHotDogs.Repos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JoesHotDogs.Controllers
 {
     public class HotDogOrdersController : Controller
     {
+        private readonly IHotDogOrderRepository _hotDogOrderRepo;
+        // GET: HotDogOrdersController
+        public HotDogOrdersController(IHotDogOrderRepository hotDogOrderRepository)
+        {
+            _hotDogOrderRepo = hotDogOrderRepository;
+        }
+
         // GET: HotDogOrdersController
         public ActionResult Index()
         {
-            return View();
+            List<HotDogOrder> hotdogOrder = _hotDogOrderRepo.GetAllHotDogOrders();
+            return View(hotdogOrder);
+        }
+        // GET: HotDogOrdersController/Details/5
+        public ActionResult Details(string id)
+        {
+            HotDogOrder hotdogOrder = _hotDogOrderRepo.GetHotDogOrderById(id);
+
+            if (hotdogOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(hotdogOrder);
         }
 
-        // GET: HotDogOrdersController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: HotDogOrdersController/Create
         public ActionResult Create()

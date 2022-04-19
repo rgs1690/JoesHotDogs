@@ -16,7 +16,7 @@ namespace JoesHotDogs.Repos
         {
             get
             {
-                return new SqlConnection(_config.GetConnectionString('DefaultConnection'));
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             }
         }
         public List<HotDogOrder> GetAllHotDogOrders()
@@ -30,20 +30,20 @@ namespace JoesHotDogs.Repos
                     SELECT Id, HotdogID, OrderId
                     FROM HotDogOrder 
                 ";
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        List<HotDogOrder> hotDogOrders = new List<HotDogOrder> ();
+                    SqlDataReader reader = cmd.ExecuteReader();
+    
+                        List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
                         while (reader.Read())
                         {
-                            HotDogOrder hotDogOrder = new HotDogOrder
+                            HotDogOrder hotDogOrder = new HotDogOrder()
                             {
                                 Id = reader.GetString(reader.GetOrdinal("Id")),
                                hotdogID = reader.GetString(reader.GetOrdinal("HotdogID")),
                                orderId = reader.GetString(reader.GetOrdinal("OrderId")),
                             };
-                        }
-                        hotDogOrders.Add(hotDogOrders);
+                        hotDogOrders.Add(hotDogOrder);                        
                     }
+                reader.Close();
                 return hotDogOrders;
                 }
             }
