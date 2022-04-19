@@ -14,7 +14,6 @@
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
     <Folder Include="FrontEnd\" />
-    <Folder Include="SqlQueries\" />
   </ItemGroup>
 
 </Project>

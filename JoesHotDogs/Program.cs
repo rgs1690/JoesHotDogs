@@ -6,6 +6,9 @@ builder.Services.AddTransient<IHotDogOrderRepository, IHotDogOrderRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
