@@ -21,7 +21,7 @@ namespace JoesHotDogs.Controllers
         }
 
         // GET: HotDogsController/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
             HotDog hotdog = _hotDogRepo.GetHotDogById(id);
 
