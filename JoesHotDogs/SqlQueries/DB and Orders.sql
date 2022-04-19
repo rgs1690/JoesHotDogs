@@ -18,20 +18,20 @@ DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Users;
 
 
-CREATE TABLE HotDogOrders (
+CREATE TABLE HotDogOrder (
 id varchar(55),
 hotdogID varchar(55),
 orderId varchar(55),
 );
 
-CREATE TABLE HotDogs (
+CREATE TABLE HotDog (
 	id varchar (55),
 	[name] varchar (255),
 	[description] varchar (255),
 	imageUrl varchar (800),
 );
 
-CREATE TABLE Orders (
+CREATE TABLE [Order] (
 	id varchar (55),
 	userId varchar (55),
 	total bigint,
@@ -46,7 +46,7 @@ CREATE TABLE Orders (
 	[status] bit,
 );
 
-CREATE TABLE Users (
+CREATE TABLE [User] (
 	id varchar(55),
 	firstName varchar (255),
 	lastName varchar (255),
