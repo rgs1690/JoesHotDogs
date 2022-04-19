@@ -39,7 +39,7 @@ namespace JoesHotDogs.Repos
                     {
                         HotDog hotdog = new HotDog()
                         {
-                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             Description = reader.GetString(reader.GetOrdinal("Description")),
                             ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
@@ -52,9 +52,41 @@ namespace JoesHotDogs.Repos
             }
         }
 
-        public HotDog GetHotDogById(string id)
+        public HotDog GetHotDogById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                HotDog hotdog = null;
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id,
+                                               [Name],
+                                               Description,
+                                               ImageUrl
+                                        FROM HotDog
+                                        WHERE Id = @Id";
+
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        hotdog = new HotDog()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Description = reader.GetString(reader.GetOrdinal("Description")),
+                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
+                        };
+                    }
+                    reader.Close();
+                }
+                return hotdog;
+            }
         }
     }
 }
