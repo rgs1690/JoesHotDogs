@@ -2,8 +2,8 @@
 {
     public class Order
     {
-        public string Id { get; set; }
-        public string UserId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public int Total { get; set; }
         public bool Delivery { get; set; }
         public int CardNum { get; set; }

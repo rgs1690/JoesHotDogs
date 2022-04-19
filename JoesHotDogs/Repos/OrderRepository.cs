@@ -43,8 +43,8 @@ namespace JoesHotDogs.Repos
                     {
                         Order order = new Order()
                         {
-                            Id = reader.GetString(reader.GetOrdinal("Id")),
-                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = (int)reader.GetInt64(reader.GetOrdinal("CardNum")),
@@ -65,7 +65,7 @@ namespace JoesHotDogs.Repos
             }
         }
         
-        public Order GetOrderById(string id)
+        public Order GetOrderById(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -86,8 +86,8 @@ namespace JoesHotDogs.Repos
                         Order order = new Order()
                         {
 
-                            Id = reader.GetString(reader.GetOrdinal("Id")),
-                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = (int)reader.GetInt64(reader.GetOrdinal("CardNum")),
@@ -136,7 +136,7 @@ namespace JoesHotDogs.Repos
                     cmd.Parameters.AddWithValue("@status", true);
 
 
-                    string id = cmd.ExecuteScalar().ToString();
+                    int id = (int)cmd.ExecuteScalar();
 
                     order.Id = id;
                 }
@@ -177,7 +177,7 @@ namespace JoesHotDogs.Repos
                 }
             }
         }
-        public void DeleteOrder(string id)
+        public void DeleteOrder(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -198,7 +198,7 @@ namespace JoesHotDogs.Repos
         }
 
 
-        public List<Order> GetOrdersByUserId(string userId)
+        public List<Order> GetOrdersByUserId(int userId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -220,8 +220,8 @@ namespace JoesHotDogs.Repos
                         Order order = new Order()
                         {
 
-                            Id = reader.GetString(reader.GetOrdinal("Id")),
-                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = (int)reader.GetInt64(reader.GetOrdinal("CardNum")),

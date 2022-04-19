@@ -87,13 +87,13 @@ INSERT INTO HotDogs
 
 
 INSERT INTO Orders (id, userId, total, delivery, cardNum, expiration, nameOnCard, billingZip, [address], phone, [date], [status]) 
-	VALUES ('9', '2', 10, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, '1649721151035', 1);
+	VALUES (9, 2, 10, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, '1649721151035', 1);
 
 INSERT INTO Orders 
-	VALUES ('10', '3', 20, 1, 456789123, '05/31', 'Felicia Morris', 34567, '100 Toe Chop Road', 8763452892, '1649721151140', 0);
+	VALUES (10, 3, 20, 1, 456789123, '05/31', 'Felicia Morris', 34567, '100 Toe Chop Road', 8763452892, '1649721151140', 0);
 
 INSERT INTO Orders 
-	VALUES ('11', 2, 35, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, '1649721151333', 1);
+	VALUES (11, 2, 35, 0, 123456789, '04/30', 'Adam West', 90210, '42 Wallaby Way', 5439087734, '1649721151333', 1);
 
 
 

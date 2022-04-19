@@ -26,7 +26,7 @@ namespace JoesHotDogs.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetOrderById(string id)
+        public IActionResult GetOrderById(int id)
         {
             var match = _orderRepo.GetOrderById(id);
 
@@ -54,7 +54,7 @@ namespace JoesHotDogs.Controllers
         [HttpPatch]
         public IActionResult UpdateOrder(Order order)
         {
-            string id = order.Id;
+            int id = order.Id;
             var match = _orderRepo.GetOrderById(id);
 
             if (match == null)
@@ -72,13 +72,13 @@ namespace JoesHotDogs.Controllers
 
 
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public void Delete(int id)
         {
             _orderRepo.DeleteOrder(id);
         }
 
         [HttpGet("user/{userId}")]
-        public IActionResult GetOrderByUserId(string userId)
+        public IActionResult GetOrderByUserId(int userId)
         {
             var matches = _orderRepo.GetOrdersByUserId(userId);
             if (matches == null)
