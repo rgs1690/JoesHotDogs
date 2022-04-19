@@ -42,7 +42,7 @@ namespace JoesHotDogs.Repos
                     {
                         User user = new User
                         {
-                            Id = reader.GetString(reader.GetOrdinal("id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("id")),
                             FirstName = reader.GetString(reader.GetOrdinal("firstName")),
                             LastName = reader.GetString(reader.GetOrdinal("lastName")),
                             Email = reader.GetString(reader.GetOrdinal("email")),
@@ -57,10 +57,44 @@ namespace JoesHotDogs.Repos
             }
         }
 
-       // public User GetUserById(int id)
-     //   {
-            // write this one
-     //   } 
+      public User GetUserById(int id)
+        {
+             using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        SELECT * FROM User
+                                        WHERE Id = @id
+                                        ";
+
+                    cmd.Parameters.AddWithValue("id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        User user = new User
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("firstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("lastName")),
+                            Email = reader.GetString(reader.GetOrdinal("email")),
+                            IsAdmin = reader.GetBoolean(reader.GetOrdinal("isAdmin"))
+
+                        };
+
+                        return user;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        } 
 
         public void AddUser(User user)
         {
@@ -81,7 +115,7 @@ namespace JoesHotDogs.Repos
                     cmd.Parameters.AddWithValue("@email", user.Email);
                     cmd.Parameters.AddWithValue("@isAdmin", user.IsAdmin);
 
-                    string id = (string)cmd.ExecuteScalar();
+                    int id = (int)cmd.ExecuteScalar();
 
                     user.Id = id;
                 }
