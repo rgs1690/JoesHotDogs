@@ -5,6 +5,6 @@ namespace JoesHotDogs.Repos
     public interface IHotDogRepository
     {
             List<HotDog> GetAllHotDogs();
-            HotDog GetHotDogById(string id);
+            HotDog GetHotDogById(int id);
     }
 }
