@@ -19,20 +19,20 @@ DROP TABLE IF EXISTS Users;
 
 
 CREATE TABLE HotDogOrder (
-id varchar(55),
-hotdogID varchar(55),
-orderId varchar(55),
+id int not null identity primary key,
+hotDogId int not null,
+orderId int not null,
 );
 
 CREATE TABLE HotDog (
-	id varchar (55),
+	id int not null identity primary key,
 	[name] varchar (255),
 	[description] varchar (255),
 	imageUrl varchar (800),
 );
 
 CREATE TABLE [Order] (
-	id varchar (55),
+	id int not null identity primary key,
 	userId varchar (55),
 	total bigint,
 	delivery bit,
@@ -47,7 +47,7 @@ CREATE TABLE [Order] (
 );
 
 CREATE TABLE [User] (
-	id varchar(55),
+	id int not null identity primary key,
 	firstName varchar (255),
 	lastName varchar (255),
 	email varchar (255),
@@ -55,18 +55,17 @@ CREATE TABLE [User] (
 );
 
 
+INSERT INTO HotDogOrder (hotDogId, orderId)
+VALUES (1, 9)
 
-INSERT INTO HotDogOrders (id, hotdogId, orderId)
-VALUES ('13','1', '9')
+INSERT INTO HotDogOrder
+VALUES (2, 10)
 
-INSERT INTO HotDogOrders
-VALUES ('14','2', '10')
+INSERT INTO HotDogOrder
+VALUES (3, 10)
 
-INSERT INTO HotDogOrders
-VALUES ('15','3', '10')
-
-INSERT INTO HotDogOrders
-VALUES ('16','4', '11')
+INSERT INTO HotDogOrder
+VALUES (4, 11)
 
 
 INSERT INTO HotDogs (id, [name], [description], imageUrl)
