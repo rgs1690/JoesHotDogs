@@ -11,5 +11,6 @@ namespace JoesHotDogs.Repos
         void UpdateOrder(Order order);
         void DeleteOrder(int id);
         List<Order> GetOrdersByUserId(int UserId);
+        List<HotDogOrder> GetHotDogOrdersByOrderId(int OrderId);
     }
 }

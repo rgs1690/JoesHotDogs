@@ -28,7 +28,7 @@ namespace JoesHotDogs.Repos
                 {
                     cmd.CommandText = @"SELECT Id,
                                                [Name],
-                                               [Description]
+                                               Description,
                                                ImageUrl
                                         FROM HotDog";
 

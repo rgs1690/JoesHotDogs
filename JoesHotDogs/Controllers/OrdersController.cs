@@ -78,9 +78,20 @@ namespace JoesHotDogs.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public IActionResult GetOrderByUserId(int userId)
+        public IActionResult GetOrdersByUserId(int userId)
         {
             var matches = _orderRepo.GetOrdersByUserId(userId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return Ok(matches);
+        }
+
+        [HttpGet("hotDogOrder/{orderId}")]
+        public IActionResult GetHotDogOrdersByOrderId(int orderId)
+        {
+            var matches = _orderRepo.GetHotDogOrdersByOrderId(orderId);
             if (matches == null)
             {
                 return NotFound();
