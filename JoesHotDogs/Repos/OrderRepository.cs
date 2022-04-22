@@ -77,6 +77,7 @@ namespace JoesHotDogs.Repos
                                       SELECT 
                                         Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,Address, Phone, Date, Status
                                       FROM [Order]
+                                      WHERE Id = @Id
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -248,23 +249,22 @@ namespace JoesHotDogs.Repos
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                HotDogOrder hotDogOrder = null;
 
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-			    SELECT HotDog.Id, HotDogOrder.Id, HotDog.[Name],HotDogOrder.OrderId, [Order].Id, [Order].Total, [Order].nameOnCard
+			    SELECT HotDog.Id, HotDogOrder.Id, HotDog.[Name],HotDogOrder.OrderId, [Order].Id, [Order].Total, [Order].nameOnCard, HotDogOrder.HotDogId
                 FROM HotDogOrder
                 LEFT JOIN HotDog ON HotDog.Id = HotDogOrder.hotDogId
-                LEFT JOIN [Order] ON [Order].Id = HotDogOrder.hotDogId
-                WHERE HotDogOrder.OrderId = orderId
+                LEFT JOIN [Order] ON [Order].Id = HotDogOrder.orderId
+                WHERE HotDogOrder.OrderId = @orderId
 			    ";
                     cmd.Parameters.AddWithValue("@orderId", orderId);
                     SqlDataReader reader = cmd.ExecuteReader();
                     List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
                     while (reader.Read())
                     {
-                        hotDogOrder = new HotDogOrder()
+                       HotDogOrder hotDogOrder = new HotDogOrder()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
@@ -272,7 +272,6 @@ namespace JoesHotDogs.Repos
                         };
                         hotDogOrders.Add(hotDogOrder);
                     }
-                    reader.Close();
                     return hotDogOrders;
                 }
             }
