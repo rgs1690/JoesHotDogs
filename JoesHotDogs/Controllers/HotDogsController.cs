@@ -20,7 +20,7 @@ namespace JoesHotDogs.Controllers
         {
             List<HotDog> hotdogs = _hotDogRepo.GetAllHotDogs();
             if (hotdogs == null) return NotFound();
-            return View(hotdogs);
+            return Ok(hotdogs);
         }
 
         [HttpGet("{id}")]
@@ -33,9 +33,10 @@ namespace JoesHotDogs.Controllers
                 return NotFound();
             }
 
-            return View(match);
+            return Ok(match);
         }
-
+    }
+}
         // GET: HotDogsController/Create
     //    public ActionResult Create()
     //    {
@@ -98,5 +99,4 @@ namespace JoesHotDogs.Controllers
     //            return View();
     //        }
     //    }
-    }
-}
+

@@ -71,7 +71,7 @@ namespace JoesHotDogs.Controllers
     
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("orders/{id}")]
         public void Delete(int id)
         {
             _orderRepo.DeleteOrder(id);
@@ -87,6 +87,15 @@ namespace JoesHotDogs.Controllers
             }
             return Ok(matches);
         }
-
+        [HttpGet("hotDogOrder/{orderId}")]
+        public IActionResult GetHotDogOrdersByOrderId(int orderId)
+        {
+            var matches = _orderRepo.GetHotDogOrdersByOrderId(orderId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return Ok(matches);
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace JoesHotDogs.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT * FROM User
+                                        SELECT * FROM [User]
                                         WHERE Id = @id
                                         ";
 
@@ -173,5 +173,7 @@ namespace JoesHotDogs.Repos
                 }
             }
         }
+
+
     }
 }

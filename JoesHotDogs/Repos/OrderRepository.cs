@@ -76,10 +76,11 @@ namespace JoesHotDogs.Repos
                                       SELECT 
                                         Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,Address, Phone, Date, Status
                                       FROM [Order]
+                                    WHERE Id = @id
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    using SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -100,10 +101,10 @@ namespace JoesHotDogs.Repos
                             Status = reader.GetBoolean(reader.GetOrdinal("Status")),
                         };
 
-                        reader.Close();
+                        /*reader.Close();*/
                         return order;
                     }
-                    reader.Close();
+                   /* reader.Close();*/
                     return null;
                 }
             }
@@ -239,10 +240,46 @@ namespace JoesHotDogs.Repos
                     return orders;
                 }
             }
+        }
 
-            //Close order
+            public List<HotDogOrder> GetHotDogOrdersByOrderId(int orderId)
+            {
+                using (SqlConnection conn = Connection)
+                {
+                    conn.Open();
+                   
+
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+			    SELECT HotDog.Id, Hdo.Id, HotDog.[Name],Hdo.OrderId, [Order].Id, [Order].Total, [Order].nameOnCard, Hdo.HotDogId
+                FROM HotDogOrder AS Hdo
+                LEFT JOIN HotDog ON HotDog.Id = Hdo.hotDogId
+                LEFT JOIN [Order] ON [Order].Id = Hdo.orderId
+                WHERE Hdo.OrderId = @orderId
+                
+			    ";
+                        cmd.Parameters.AddWithValue("@orderId", orderId);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
+                        while (reader.Read())
+                        {
+                            HotDogOrder hotDogOrder = new HotDogOrder()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
+                                HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId")),
+                            };
+                            hotDogOrders.Add(hotDogOrder);
+                        }
+                      
+                        return hotDogOrders;
+                    }
+                    
+                }
+            }
 
         }
 
     }
-}
+
