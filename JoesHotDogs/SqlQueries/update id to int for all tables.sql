@@ -29,3 +29,9 @@ ADD id int not null identity primary key;
 
 ALTER TABLE [Order]
 ALTER COLUMN userId int not null;
+
+ALTER TABLE HotDogOrder
+ALTER COLUMN hotdogID int not null;
+
+ALTER TABLE HotDogOrder
+ALTER COLUMN orderId int not null;
