@@ -35,7 +35,8 @@ namespace JoesHotDogs.Controllers
 
             return Ok(match);
         }
-
+    }
+}
         // GET: HotDogsController/Create
     //    public ActionResult Create()
     //    {
@@ -98,5 +99,4 @@ namespace JoesHotDogs.Controllers
     //            return View();
     //        }
     //    }
-    }
-}
+

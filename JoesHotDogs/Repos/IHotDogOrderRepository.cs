@@ -7,6 +7,6 @@
 //    public interface IHotDogOrderRepository
 //    {
 //        List<HotDogOrder> GetAllHotDogOrders();
-//        HotDogOrder GetHotDogOrderById(string id);
+//        HotDogOrder GetHotDogOrderById(int id);
 //    }
 //}

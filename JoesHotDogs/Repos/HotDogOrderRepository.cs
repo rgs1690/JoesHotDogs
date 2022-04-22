@@ -31,13 +31,13 @@
 //                    FROM HotDogOrder 
 //                ";
 //                    SqlDataReader reader = cmd.ExecuteReader();
-    
+
 //                        List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
 //                        while (reader.Read())
 //                        {
 //                            HotDogOrder hotDogOrder = new HotDogOrder()
 //                            {
-//                                Id = reader.GetString(reader.GetOrdinal("Id")),
+//                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
 //                               hotdogID = reader.GetString(reader.GetOrdinal("HotdogID")),
 //                               orderId = reader.GetString(reader.GetOrdinal("OrderId")),
 //                            };
@@ -47,6 +47,11 @@
 //                return hotDogOrders;
 //                }
 //            }
+//        }
+
+//        public HotDogOrder GetHotDogOrderById(int id)
+//        {
+//            throw new NotImplementedException();
 //        }
 //    }
 //}
