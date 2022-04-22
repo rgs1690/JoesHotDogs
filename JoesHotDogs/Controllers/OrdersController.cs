@@ -78,7 +78,7 @@ namespace JoesHotDogs.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public IActionResult GetOrdersByUserId(int userId)
+        public IActionResult GetOrderByUserId(int userId)
         {
             var matches = _orderRepo.GetOrdersByUserId(userId);
             if (matches == null)
@@ -97,5 +97,45 @@ namespace JoesHotDogs.Controllers
             }
             return Ok(matches);
         }
+       
+        
+        [HttpPost("hotDogOrder")]
+        public IActionResult CreateNewHotDogOrder(HotDogOrder newHotDogOrder)
+        {
+            if (newHotDogOrder == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _orderRepo.CreateHotDogOrder(newHotDogOrder);
+                return Ok(newHotDogOrder);
+            }
+        }
+
+
+        [HttpPatch("hotDogOrder")]
+        public IActionResult UpdateHotDogOrder(HotDogOrder hotDogOrder)
+        {
+            int id = hotDogOrder.Id;
+            var match = _orderRepo.GetHotDogOrderById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _orderRepo.UpdateHotDogOrder(hotDogOrder);
+                return Ok(hotDogOrder);
+            }
+
+        }
+        [HttpDelete("hotDogOrders/{id}")]
+        public void DeleteHotDogOrder(int id)
+        {
+            _orderRepo.DeleteHotDogOrder(id);
+        }
+
     }
 }

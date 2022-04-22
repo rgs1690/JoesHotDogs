@@ -81,7 +81,7 @@ namespace JoesHotDogs.Repos
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    using SqlDataReader reader = cmd.ExecuteReader();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -102,10 +102,10 @@ namespace JoesHotDogs.Repos
                             Status = reader.GetBoolean(reader.GetOrdinal("Status")),
                         };
 
-                        /*reader.Close();*/
+                        reader.Close();
                         return order;
                     }
-                   /* reader.Close();*/
+                    reader.Close();
                     return null;
                 }
             }
@@ -241,7 +241,6 @@ namespace JoesHotDogs.Repos
                     return orders;
                 }
             }
-        }
 
         }
 
@@ -265,7 +264,7 @@ namespace JoesHotDogs.Repos
                     List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
                     while (reader.Read())
                     {
-                       HotDogOrder hotDogOrder = new HotDogOrder()
+                        HotDogOrder hotDogOrder = new HotDogOrder()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
@@ -276,6 +275,114 @@ namespace JoesHotDogs.Repos
                     return hotDogOrders;
                 }
             }
+        }
+
+        public void CreateHotDogOrder(HotDogOrder hotDogOrder)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO HotDogOrder
+                    (OrderId, HotDogId)
+                    OUTPUT INSERTED.ID
+                    VALUES (@orderId, @hotDogId);
+                    ";
+
+                    cmd.Parameters.AddWithValue("@orderId", hotDogOrder.OrderId);
+                    cmd.Parameters.AddWithValue("@hotDogId", hotDogOrder.HotDogId);
+
+                    int id = (int)cmd.ExecuteScalar();
+
+                    hotDogOrder.Id = id;
+                }
+            }
+        }
+
+
+        public void UpdateHotDogOrder(HotDogOrder hotDogOrder)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    UPDATE HotDogOrder
+                    SET
+                        HotDogId = @hotDogId
+                    WHERE Id = @id;
+                    ";
+
+                    cmd.Parameters.AddWithValue("@id", hotDogOrder.Id);
+                    cmd.Parameters.AddWithValue("@hotDogId", hotDogOrder.HotDogId);
+
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public void DeleteHotDogOrder(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    DELETE FROM HotDogOrder
+                    WHERE Id = @id
+                    ";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
+
+        public HotDogOrder GetHotDogOrderById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                      SELECT 
+                                        Id, HotDogId, OrderId
+                                      FROM [HotDogOrder]
+                                      WHERE Id = @Id
+                                      ";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        HotDogOrder hotDogOrder = new HotDogOrder()
+                        {
+
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId")),
+                            OrderId = (int)reader.GetInt32(reader.GetOrdinal("OrderId")),
+
+                        };
+
+                        reader.Close();
+                        return hotDogOrder;
+                    }
+                    reader.Close();
+                    return null;
+                }
+            }
+
         }
     }
 }
