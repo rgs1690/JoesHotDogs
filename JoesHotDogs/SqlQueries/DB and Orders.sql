@@ -33,7 +33,7 @@ CREATE TABLE HotDog (
 
 CREATE TABLE [Order] (
 	id int not null identity primary key,
-	userId varchar (55),
+	userId int not null,
 	total bigint,
 	delivery bit,
 	cardNum bigint,
