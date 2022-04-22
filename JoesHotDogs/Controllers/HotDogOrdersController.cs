@@ -21,7 +21,7 @@
 //            return View(hotdogOrder);
 //        }
 //        // GET: HotDogOrdersController/Details/5
-//        public ActionResult Details(string id)
+//        public ActionResult Details(int id)
 //        {
 //            HotDogOrder hotdogOrder = _hotDogOrderRepo.GetHotDogOrderById(id);
 
