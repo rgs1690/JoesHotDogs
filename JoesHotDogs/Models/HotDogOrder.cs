@@ -3,7 +3,7 @@
     public class HotDogOrder
     {
         public int Id { get; set; }
-        public string hotdogID { get; set; }
-        public string orderId { get; set; }
+        public int HotDogId { get; set; }
+        public int OrderId { get; set; }
     }
 }
