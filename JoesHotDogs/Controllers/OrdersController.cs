@@ -78,7 +78,7 @@ namespace JoesHotDogs.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public IActionResult GetOrderByUserId(int userId)
+        public IActionResult GetOrdersByUserId(int userId)
         {
             var matches = _orderRepo.GetOrdersByUserId(userId);
             if (matches == null)

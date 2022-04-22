@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 
 namespace JoesHotDogs.Repos
-    
+
 {
     public class OrderRepository : IOrderRepository
     {
@@ -16,7 +16,7 @@ namespace JoesHotDogs.Repos
             _config = config;
         }
 
-      
+
         public SqlConnection Connection
         {
             get
@@ -54,17 +54,18 @@ namespace JoesHotDogs.Repos
                             Address = reader.GetString(reader.GetOrdinal("Address")),
                             Phone = (int)reader.GetInt64(reader.GetOrdinal("Phone")),
                             Date = reader.GetString(reader.GetOrdinal("Date")),
-                            Status = reader.GetBoolean(reader.GetOrdinal("Status")),                        };
+                            Status = reader.GetBoolean(reader.GetOrdinal("Status")),
+                        };
 
                         orders.Add(order);
                     }
                     reader.Close();
 
-                    return orders; 
+                    return orders;
                 }
             }
         }
-        
+
         public Order GetOrderById(int id)
         {
             using (SqlConnection conn = Connection)
@@ -76,7 +77,7 @@ namespace JoesHotDogs.Repos
                                       SELECT 
                                         Id, UserId, Total, Delivery, CardNum, Expiration, NameOnCard, BillingZip,Address, Phone, Date, Status
                                       FROM [Order]
-                                    WHERE Id = @id
+                                      WHERE Id = @Id
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -108,7 +109,7 @@ namespace JoesHotDogs.Repos
                     return null;
                 }
             }
-        
+
         }
         public void CreateOrder(Order order)
         {
@@ -143,7 +144,7 @@ namespace JoesHotDogs.Repos
                 }
             }
         }
-   
+
         public void UpdateOrder(Order order)
         {
             using (SqlConnection conn = Connection)
@@ -172,7 +173,7 @@ namespace JoesHotDogs.Repos
                     cmd.Parameters.AddWithValue("@billingZip", order.BillingZip);
                     cmd.Parameters.AddWithValue("@address", order.Address);
                     cmd.Parameters.AddWithValue("@phone", order.Phone);
-             
+
 
                     cmd.ExecuteNonQuery();
                 }
@@ -242,44 +243,39 @@ namespace JoesHotDogs.Repos
             }
         }
 
-            public List<HotDogOrder> GetHotDogOrdersByOrderId(int orderId)
-            {
-                using (SqlConnection conn = Connection)
-                {
-                    conn.Open();
-                   
-
-                    using (SqlCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"
-			    SELECT HotDog.Id, Hdo.Id, HotDog.[Name],Hdo.OrderId, [Order].Id, [Order].Total, [Order].nameOnCard, Hdo.HotDogId
-                FROM HotDogOrder AS Hdo
-                LEFT JOIN HotDog ON HotDog.Id = Hdo.hotDogId
-                LEFT JOIN [Order] ON [Order].Id = Hdo.orderId
-                WHERE Hdo.OrderId = @orderId
-                
-			    ";
-                        cmd.Parameters.AddWithValue("@orderId", orderId);
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
-                        while (reader.Read())
-                        {
-                            HotDogOrder hotDogOrder = new HotDogOrder()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
-                                HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId")),
-                            };
-                            hotDogOrders.Add(hotDogOrder);
-                        }
-                      
-                        return hotDogOrders;
-                    }
-                    
-                }
-            }
-
         }
 
-    }
+        public List<HotDogOrder> GetHotDogOrdersByOrderId(int orderId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
 
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+			    SELECT HotDog.Id, HotDogOrder.Id, HotDog.[Name],HotDogOrder.OrderId, [Order].Id, [Order].Total, [Order].nameOnCard, HotDogOrder.HotDogId
+                FROM HotDogOrder
+                LEFT JOIN HotDog ON HotDog.Id = HotDogOrder.hotDogId
+                LEFT JOIN [Order] ON [Order].Id = HotDogOrder.orderId
+                WHERE HotDogOrder.OrderId = @orderId
+			    ";
+                    cmd.Parameters.AddWithValue("@orderId", orderId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
+                    while (reader.Read())
+                    {
+                       HotDogOrder hotDogOrder = new HotDogOrder()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
+                            HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId")),
+                        };
+                        hotDogOrders.Add(hotDogOrder);
+                    }
+                    return hotDogOrders;
+                }
+            }
+        }
+    }
+}
