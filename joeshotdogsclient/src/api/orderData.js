@@ -5,7 +5,7 @@ const baseURL = databaseConfig.databaseURL;
 
 const getAllOrders = () => new Promise((resolve, reject) => {
     axios 
-    .get(`${baseURL}/api/orders.json`)
+    .get(`${baseURL}/orders`)
     .then((response) => resolve(Object.values(response.data)))
     .catch(reject)
 });
