@@ -1,11 +1,9 @@
-<!DOCTYPE html>
+import React from 'react';
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+export default function Login(){
+    return (
+        <div>
+            <h1>THIS IS THE LOGIN PAGE</h1>
+        </div>
+    )
+}
