@@ -1,7 +1,7 @@
 import axios from 'axios';
-import databaseConfig from './auth/apiKeys';
+//import databaseConfig from './auth/apiKeys';
 
-const baseURL = databaseConfig.databaseURL;
+const baseURL = "https://localhost:7069/api";
 
 const getAllOrders = () => new Promise((resolve, reject) => {
     axios 
