@@ -1,10 +1,12 @@
 import React from 'react';
 import Routing from './routes';
 import './App.css';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div>
+      <Navbar />
       <Routing />
       
     </div>
