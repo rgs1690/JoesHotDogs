@@ -21,7 +21,7 @@ export default function Home(){
   
   <div class="card-body">
     <h5 class="card-title">{order.nameOnCard}</h5>
-    <p class="card-text">{order.Total}</p>
+    <p class="card-text">{order.total}</p>
   
   </div>
   </div>
