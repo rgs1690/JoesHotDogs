@@ -4,8 +4,8 @@ import './App.css';
 
 
 function App() {
-
-
+    require('dotenv').config()
+    console.log(process.env)
   return (
     <div>
       <Routing />
