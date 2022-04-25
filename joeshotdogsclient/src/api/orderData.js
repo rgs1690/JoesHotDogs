@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+import axios from 'axios';
+//import databaseConfig from './auth/apiKeys';
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+const baseURL = "https://localhost:7069/api";
 
-</body>
-</html>
+const getAllOrders = () => new Promise((resolve, reject) => {
+    axios 
+       .get(`${baseURL}/orders`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch(reject)
+});
+export default getAllOrders;
+
