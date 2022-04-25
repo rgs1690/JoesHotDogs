@@ -1,5 +1,6 @@
 import React from 'react';
 import Routing from './routes';
+import Navbar from './components/Navbar';
 import './App.css';
 
 
@@ -8,6 +9,7 @@ function App() {
     console.log(process.env)
   return (
     <div>
+      <Navbar />
       <Routing />
       </div>
       
