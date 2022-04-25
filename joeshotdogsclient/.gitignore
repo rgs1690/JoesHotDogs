@@ -1,5 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+<<<<<<< HEAD
 
+=======
+package-lock.json
+<<<<<<< connectingDatabase-gs
+=======
+
+>>>>>>> main
+>>>>>>> a0cdb2e82928c1d533919b9506668390c7b785a4
 # dependencies
 /node_modules
 /.pnp
