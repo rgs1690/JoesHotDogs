@@ -6,8 +6,7 @@ import Navbar from './components/Navbar';
 
 
 function App() {
-    require('dotenv').config()
-    console.log(process.env)
+
   return (
     <div>
       <Navbar />
