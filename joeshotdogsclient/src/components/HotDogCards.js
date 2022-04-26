@@ -19,6 +19,7 @@ export default function HotDogCards({ hotDog }) {
 
 HotDogCards.propTypes = {
     hotDog: PropTypes.shape({
+        id: PropTypes.number,
         name: PropTypes.string,
         description: PropTypes.string,
         imageUrl: PropTypes.string,

@@ -6,28 +6,24 @@ export default function Menu() {
     const [hotDogs, setHotDogs] = useState([]);
 
     useEffect(() => {
-        let isMounted = true;
-        getAllHotDogs().then((setHotDogs) => {
-            if (isMounted) setHotDogs(hotDogs);
-        });
-        return () => {
-            isMounted = false;
-        };
+        getAllHotDogs().then(setHotDogs);
     }, []);
 
     return (
-        <div>
-            <h1>Look at these DOGS!</h1>
+        <>
             <div>
-                {hotDogs.map((hotDog) => (
-                        <HotDogCards
-                            key={hotDog.id}
-                            hotDog={hotDog}
-                            setHotDogs={setHotDogs}
-                        />
-                            ))
-                }
-            </div>
-        </div>
-    )
+               <h1>Look at these DOGS! or not</h1>
+                <div>
+                    <>
+                        {hotDogs.map((hotDog) => (
+                            <HotDogCards
+                                key={hotDog.id}
+                                hotDog={hotDog}
+                            />
+                        ))}
+                    </>
+                </div>
+           </div>
+        </>
+    );
 }
