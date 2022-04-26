@@ -17,11 +17,11 @@ export default function Home(){
       <div>
         {orders.map((order) => (
   
-  <div class="card">
+  <div className="card">
   
-  <div class="card-body">
-    <h5 class="card-title">{order.nameOnCard}</h5>
-    <p class="card-text">{order.total}</p>
+  <div className="card-body">
+    <h5 className="card-title">{order.nameOnCard}</h5>
+    <p className="card-text">{order.total}</p>
   
   </div>
   </div>
