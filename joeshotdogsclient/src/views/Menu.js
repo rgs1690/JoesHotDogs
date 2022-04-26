@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import getAllHotDogs from '../api/hotDogData';
+import HotDogCards from '../components/HotDogCards';
 
 export default function Menu() {
-    const [allHotDogs, setAllHotDogs] = useState([]);
+    const [hotDogs, setHotDogs] = useState([]);
 
     useEffect(() => {
         let isMounted = true;
-        getAllHotDogs().then((hotDogs) => {
-            if (isMounted) setAllHotDogs(hotDogs);
+        getAllHotDogs().then((setHotDogs) => {
+            if (isMounted) setHotDogs(hotDogs);
         });
         return () => {
             isMounted = false;
@@ -18,13 +19,15 @@ export default function Menu() {
         <div>
             <h1>Look at these DOGS!</h1>
             <div>
-                {hotDogs.length > 0 ? (
-                    hotDogs.map((hotDog) => (
+                {hotDogs.map((hotDog) => (
                         <HotDogCards
                             key={hotDog.id}
                             hotDog={hotDog}
-                            setAllHotDogs={setAllHotDogs}
-}
+                            setHotDogs={setHotDogs}
+                        />
+                            ))
+                }
+            </div>
         </div>
     )
 }
