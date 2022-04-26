@@ -3,9 +3,9 @@ import Routing from './routes';
 import Navbar from './components/Navbar';
 import './App.css';
 
-function App() {npm 
-    require('dotenv').config()
-    console.log(process.env)
+
+function App() {
+
   return (
     <div>
       <Navbar />
