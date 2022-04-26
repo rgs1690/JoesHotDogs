@@ -1,10 +1,10 @@
 import React from 'react';
 import Routing from './routes';
-import bootstrap from 'bootstrap';
 import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
+
   return (
     <div>
       <Navbar />
