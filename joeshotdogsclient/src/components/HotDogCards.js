@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "bootstrap/js/src/collapse";
 
+
 export default function HotDogCards({ hotDog }) {
-    return(
+    return (
         <>
-            <div class="hotDogCard">
-                <img src={hotDog.imageUrl} class="card-img-top" alt={hotDog.name}></img>
-                    <div class="card-body">
-                    <h5 class="card-title">{hotDog.name}</h5>
-                    <p class="card-text">{hotDog.description}</p>
-                        <a href="#" class="btn btn-primary">Add to Order?</a>
+            <div className="hotDogCard" style={{ width: '18rem' }}>
+                <img src={hotDog.imageUrl} className="card-img-top" alt={hotDog.name}></img>
+                    <div className="card-body">
+                    <h5 className="card-title">{hotDog.name}</h5>
+                    <p className="card-text">{hotDog.description}</p>
+                        <a href="#" className="btn btn-primary">Add to Order?</a>
                     </div>
             </div>
         </>
@@ -19,6 +20,7 @@ export default function HotDogCards({ hotDog }) {
 
 HotDogCards.propTypes = {
     hotDog: PropTypes.shape({
+        id: PropTypes.number,
         name: PropTypes.string,
         description: PropTypes.string,
         imageUrl: PropTypes.string,
