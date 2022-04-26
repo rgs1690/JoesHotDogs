@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import getAllOrders from '../api/orderData';
+import { getAllOrders } from '../api/orderData';
+
 export default function Home(){
     const [orders, setOrders] = useState([]);
     useEffect(() => {

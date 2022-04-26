@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import "bootstrap/js/src/collapse";
 
 export default function HotDogCards({ hotDog }) {
-    return
-    (
+    return(
         <>
-            <div class="hotDogCard" style="width: 18rem;">
+            <div class="hotDogCard">
                 <img src={hotDog.imageUrl} class="card-img-top" alt={hotDog.name}></img>
                     <div class="card-body">
                     <h5 class="card-title">{hotDog.name}</h5>
