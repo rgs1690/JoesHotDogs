@@ -2,10 +2,8 @@ import React from 'react';
 import Routing from './routes';
 import Navbar from './components/Navbar';
 import './App.css';
-import Navbar from './components/Navbar';
 
-
-function App() {
+function App() {npm 
     require('dotenv').config()
     console.log(process.env)
   return (
