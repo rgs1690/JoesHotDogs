@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getAllHotDogs from '../api/hotDogData';
+import { getAllHotDogs } from '../api/hotDogData';
 import HotDogCards from '../components/HotDogCards';
 
 export default function Menu() {
