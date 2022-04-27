@@ -9,4 +9,12 @@ const getAllHotDogs = () => new Promise((resolve, reject) => {
         .catch(reject);
 });
 
-export default getAllHotDogs;
+const getHotDogById = (hotdogId) => new Promise((resolve, reject) => {
+    axios.get(`${baseURL}/HotDogs/${hotdogId}`)
+    .then((response) => {
+        resolve(response.data);
+    })
+    .catch(reject)
+})
+
+export { getAllHotDogs, getHotDogById };
