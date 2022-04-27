@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { getAllOrders } from '../api/orderData';
+import {getAllOrders} from '../api/orderData';
+
 export default function Home(){
     const [orders, setOrders] = useState([]);
     useEffect(() => {
@@ -17,15 +18,14 @@ export default function Home(){
       <div>
         {orders.map((order) => (
   
-  <div className="card">
+  <div class="card">
   
-  <div className="card-body">
-    <h5 className="card-title">{order.nameOnCard}</h5>
-    <p className="card-text">{order.total}</p>
+  <div class="card-body">
+    <h5 class="card-title">{order.nameOnCard}</h5>
+    <p class="card-text">{order.total}</p>
   
   </div>
   </div>
-  
         ))}
   
   
