@@ -1,79 +1,165 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import {  useParams, useNavigate } from "react-router-dom";
+import { createOrder, updateOrder } from "../api/orderData";
+import "bootstrap/js/src/collapse";
 
- 
- export default function OrderForm() {
-   return (
-       <form>
-    <div class="form-group">
+export default function OrderForm({ obj }) {
+  const initialState = {
+    cardNum: "",
+    expiration: "",
+    nameOnCard: "",
+    billingZip: "",
+    address: "",
+    phone: "",
+    date: "",
+    status: true,
+    delivery: false,
+    userId: "",
+    total: "",
+  };
 
-    <label for="cardNum">Credit Card Number</label>
 
-    <input type="text" class="form-control" id="cardNum" aria-describedby="card number" placeholder="xxxxxxxxxx"/>
+  const [formInput, setFormInput] = useState(initialState);
+  const { key } = useParams();
+    const navigate = useNavigate();
 
-  </div>
+  useEffect(() => {
+    if (obj.id) {
+      setFormInput({
+        id: obj.id,
+        cardNum: obj.cardNum,
+        expiration: obj.expiration,
+        nameOnCard: obj.nameOnCard,
+        billingZip: obj.billingZip,
+        address: obj.address,
+        phone: obj.phone,
+        date: obj.date,
+        status: obj.status,
+        delivery: obj.delivery,
+        userId: obj.userId,
+        total: obj.total,
+      });
+    }
+  }, [obj]);
 
-  <div class="form-group">
+  const resetForm = () => {
+    setFormInput(initialState);
+  };
 
-    <label for="expiration">Expiration Date</label>
+  const handleChange = (e) => {
+    setFormInput((prevState) => ({
+      ...prevState,
 
-    <input type="text" class="form-control" id="expiration" placeholder="00/00"/>
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  </div>
+  const handleClick = (e) => {
+    e.preventDefault();
 
-<div class="form-group">
+    if (obj.id) {
+        updateOrder(formInput).then(() => {
+            navigate("/Orders");
+      });
+    } else {
+      createOrder({
+        ...formInput,
+      }).then(() => {
+        resetForm();
 
-    <label for="nameOnCard">Name</label>
+        navigate("/ThankYou");
+      });
+    }
+  };
+  return (
+    <form>
+      <div className="form-group">
+        <label htmlFor="cardNum">Credit Card Number</label>
 
-    <input type="text" class="form-control" id="nameOnCard" placeholder="Enter Name"/>
+        <input
+          type="text"
+          class="form-control"
+          id="cardNum"
+          aria-describedby="card number"
+          placeholder="xxxxxxxxxx"
+        />
+      </div>
 
-  </div>
+      <div class="form-group">
+        <label htmlFor="expiration">Expiration Date</label>
 
-<div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="expiration"
+          placeholder="00/00"
+        />
+      </div>
 
-    <label for="billingZip">Billing Zipcode</label>
+      <div class="form-group">
+        <label htmlFor="nameOnCard">Name</label>
 
-    <input type="text" class="form-control" id="billingZip" placeholder="Enter Zip Code"/>
+        <input
+          type="text"
+          class="form-control"
+          id="nameOnCard"
+          placeholder="Enter Name"
+        />
+      </div>
 
-  </div>
+      <div class="form-group">
+        <label htmlFor="billingZip">Billing Zipcode</label>
 
-<div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="billingZip"
+          placeholder="Enter Zip Code"
+        />
+      </div>
 
-    <label for="address">Address</label>
+      <div className="form-group">
+        <label htmlFor="address">Address</label>
 
-    <input type="text" class="form-control" id="address" placeholder="Enter Address"/>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          placeholder="Enter Address"
+        />
+      </div>
 
-  </div>
+      <div class="form-group">
+        <label htmlFor="phone">Phone Number</label>
 
-<div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          placeholder="0000000000"
+        />
+      </div>
 
-    <label for="phone">Phone Number</label>
+      <div className="form-check">
+        <input type="checkbox" className="form-check-input" id="delivery" />
 
-    <input type="text" class="form-control" id="phone" placeholder="0000000000"/>
+        <label className="form-check-label" htmlFor="exampleCheck1">
+          Delivery?
+        </label>
+      </div>
 
-  </div>
+      <div className="form-check">
+        <input type="checkbox" class="form-check-input" id="pickup" />
 
-  <div class="form-check">
+        <label class="form-check-label" htmlFor="exampleCheck1">
+          Pickup?
+        </label>
+      </div>
 
-    <input type="checkbox" class="form-check-input" id="delivery"/>
-
-    <label class="form-check-label" for="exampleCheck1">Delivery?</label>
-
-  </div>
-
-<div class="form-check">
-
-    <input type="checkbox" class="form-check-input" id="pickup"/>
-
-    <label class="form-check-label" for="exampleCheck1">Pickup?</label>
-
-  </div>
-
-  <button type="submit" class="btn btn-primary">Add Food!</button>
-
-</form>
-   )
- }
- 
-
+      <button type="submit" class="btn btn-primary">
+        Add Food!
+      </button>
+    </form>
+  );
+}
