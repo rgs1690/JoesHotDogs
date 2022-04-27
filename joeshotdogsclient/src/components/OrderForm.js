@@ -79,41 +79,41 @@ export default function OrderForm({ obj }) {
 
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="cardNum"
           aria-describedby="card number"
           placeholder="xxxxxxxxxx"
         />
       </div>
 
-      <div class="form-group">
+      <div className="form-group">
         <label htmlFor="expiration">Expiration Date</label>
 
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="expiration"
           placeholder="00/00"
         />
       </div>
 
-      <div class="form-group">
+      <div className="form-group">
         <label htmlFor="nameOnCard">Name</label>
 
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="nameOnCard"
           placeholder="Enter Name"
         />
       </div>
 
-      <div class="form-group">
+      <div className="form-group">
         <label htmlFor="billingZip">Billing Zipcode</label>
 
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="billingZip"
           placeholder="Enter Zip Code"
         />
@@ -124,18 +124,18 @@ export default function OrderForm({ obj }) {
 
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="address"
           placeholder="Enter Address"
         />
       </div>
 
-      <div class="form-group">
+      <div className="form-group">
         <label htmlFor="phone">Phone Number</label>
 
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="phone"
           placeholder="0000000000"
         />
@@ -152,12 +152,12 @@ export default function OrderForm({ obj }) {
       <div className="form-check">
         <input type="checkbox" class="form-check-input" id="pickup" />
 
-        <label class="form-check-label" htmlFor="exampleCheck1">
+        <label className="form-check-label" htmlFor="exampleCheck1">
           Pickup?
         </label>
       </div>
 
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Add Food!
       </button>
     </form>
