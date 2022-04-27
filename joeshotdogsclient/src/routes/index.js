@@ -23,7 +23,7 @@ return (
         <Route exact path="/Orders" element={<Orders/>}></Route>
         <Route exact path="/Payment" element={<Payment/>}></Route>
         <Route exact path="/ThankYou" element={<ThankYou/>}></Route>
-        <Route exact path="/CartForm:id" element={<CartForm/>} />
+        <Route exact path="/CartForm/:id" element={<CartForm/>} />
         <Route exact path="/OrderForm" element={<OrderForm/>} />
         </Routes>
 

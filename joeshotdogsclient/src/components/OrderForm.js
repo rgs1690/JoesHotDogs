@@ -180,3 +180,8 @@ export default function OrderForm({ obj = {} }) {
     </form>
   );
 }
+
+OrderForm.propTypes = {
+    obj: PropTypes.shape({}),
+}
+OrderForm.defaultProps = { obj: {} }
