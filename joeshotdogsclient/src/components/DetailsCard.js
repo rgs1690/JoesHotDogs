@@ -1,11 +1,16 @@
-<!DOCTYPE html>
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+function HotDogDetailsCard({ hotdog }) {
+  return (
+<div className="card mb-3">
+  <img src={hotdog.imageUrl} className="card-img-top" alt={hotdog.name} />
+  <div className="card-body">
+    <h5 className="card-title">{hotdog.name}</h5>
+    <p className="card-text">{hotdog.description}</p>
+  </div>
+</div>
+  )
+}
 
-</body>
-</html>
+export default HotDogDetailsCard;
