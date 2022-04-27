@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {  useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createOrder, updateOrder } from "../api/orderData";
 import "bootstrap/js/src/collapse";
 
-export default function OrderForm({ obj }) {
+export default function OrderForm({ obj = {} }) {
   const initialState = {
     cardNum: "",
     expiration: "",
@@ -21,7 +21,7 @@ export default function OrderForm({ obj }) {
 
 
   const [formInput, setFormInput] = useState(initialState);
-  const { key } = useParams();
+ 
     const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,28 +61,30 @@ export default function OrderForm({ obj }) {
     if (obj.id) {
         updateOrder(formInput).then(() => {
             navigate("/Orders");
-      });
+      })
     } else {
       createOrder({
         ...formInput,
-      }).then(() => {
+        date: new Date(),
+      }).then((id) => {
         resetForm();
 
-        navigate("/ThankYou");
+        navigate(`/Cart/${id}`);
       });
     }
   };
   return (
-    <form>
+    <form onSubmit={handleClick}>
       <div className="form-group">
         <label htmlFor="cardNum">Credit Card Number</label>
 
         <input
           type="text"
           className="form-control"
-          id="cardNum"
+          value={formInput.cardNum || ''}
           aria-describedby="card number"
           placeholder="xxxxxxxxxx"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -92,8 +94,9 @@ export default function OrderForm({ obj }) {
         <input
           type="text"
           className="form-control"
-          id="expiration"
+          value={formInput.expiratiom || ''}
           placeholder="00/00"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -103,8 +106,9 @@ export default function OrderForm({ obj }) {
         <input
           type="text"
           className="form-control"
-          id="nameOnCard"
+          value={formInput.nameOnCard || ''}
           placeholder="Enter Name"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -114,8 +118,9 @@ export default function OrderForm({ obj }) {
         <input
           type="text"
           className="form-control"
-          id="billingZip"
+          value={formInput.billingZip || ''}
           placeholder="Enter Zip Code"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -125,8 +130,9 @@ export default function OrderForm({ obj }) {
         <input
           type="text"
           className="form-control"
-          id="address"
+          value={formInput.address || ''}
           placeholder="Enter Address"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -136,13 +142,19 @@ export default function OrderForm({ obj }) {
         <input
           type="text"
           className="form-control"
-          id="phone"
+          value={formInput.phone || ''}
           placeholder="0000000000"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
       <div className="form-check">
-        <input type="checkbox" className="form-check-input" id="delivery" />
+        <input 
+            type="checkbox" 
+            className="form-check-input" 
+            value={formInput.delivery === true || ''}
+            onChange={(e) => handleChange(e)}
+            />
 
         <label className="form-check-label" htmlFor="exampleCheck1">
           Delivery?
@@ -150,7 +162,12 @@ export default function OrderForm({ obj }) {
       </div>
 
       <div className="form-check">
-        <input type="checkbox" class="form-check-input" id="pickup" />
+        <input 
+            type="checkbox" 
+            className="form-check-input" 
+            value={formInput.delivery === false || ''}
+            onChange={(e) => handleChange(e)}
+            />
 
         <label className="form-check-label" htmlFor="exampleCheck1">
           Pickup?
