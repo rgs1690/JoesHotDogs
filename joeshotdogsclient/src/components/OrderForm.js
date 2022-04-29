@@ -4,27 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { createOrder, updateOrder } from "../api/orderData";
 import "bootstrap/js/src/collapse";
 
+const initialState = {
+  cardNum: "",
+  expiration: "",
+  nameOnCard: "",
+  billingZip: "",
+  address: "",
+  phone: "",
+  date: "",
+  status: true,
+  delivery: false,
+  userId: "",
+  total: "",
+};
 export default function OrderForm({ obj = {} }) {
-  const initialState = {
-    cardNum: "",
-    expiration: "",
-    nameOnCard: "",
-    billingZip: "",
-    address: "",
-    phone: "",
-    date: "",
-    status: true,
-    delivery: false,
-    userId: "",
-    total: "",
-  };
-
-
+  const [checked, setChecked] = useState();
   const [formInput, setFormInput] = useState(initialState);
- 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  
+useEffect(() => {
     if (obj.id) {
       setFormInput({
         id: obj.id,
@@ -37,7 +36,6 @@ export default function OrderForm({ obj = {} }) {
         date: obj.date,
         status: obj.status,
         delivery: obj.delivery,
-        userId: obj.userId,
         total: obj.total,
       });
     }
@@ -54,7 +52,12 @@ export default function OrderForm({ obj = {} }) {
       [e.target.name]: e.target.value,
     }));
   };
-
+const handleCheck = () => {
+    setChecked(!checked);
+    if (checked) {
+        obj.delivery = true;
+    }
+}
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -66,10 +69,12 @@ export default function OrderForm({ obj = {} }) {
       createOrder({
         ...formInput,
         date: new Date(),
+        userId: 1,
+        total:1
       }).then((id) => {
+          console.log(id)
         resetForm();
-
-        navigate(`/Cart/${id}`);
+        navigate(`/CartForm/${id}`);
       });
     }
   };
@@ -85,6 +90,7 @@ export default function OrderForm({ obj = {} }) {
           aria-describedby="card number"
           placeholder="xxxxxxxxxx"
           onChange={(e) => handleChange(e)}
+          name="cardNum"
         />
       </div>
 
@@ -94,9 +100,10 @@ export default function OrderForm({ obj = {} }) {
         <input
           type="text"
           className="form-control"
-          value={formInput.expiratiom || ''}
+          value={formInput.expiration || ''}
           placeholder="00/00"
           onChange={(e) => handleChange(e)}
+          name="expiration"
         />
       </div>
 
@@ -109,6 +116,7 @@ export default function OrderForm({ obj = {} }) {
           value={formInput.nameOnCard || ''}
           placeholder="Enter Name"
           onChange={(e) => handleChange(e)}
+          name="nameOnCard"
         />
       </div>
 
@@ -121,6 +129,7 @@ export default function OrderForm({ obj = {} }) {
           value={formInput.billingZip || ''}
           placeholder="Enter Zip Code"
           onChange={(e) => handleChange(e)}
+          name="billingZip"
         />
       </div>
 
@@ -133,6 +142,7 @@ export default function OrderForm({ obj = {} }) {
           value={formInput.address || ''}
           placeholder="Enter Address"
           onChange={(e) => handleChange(e)}
+          name="address"
         />
       </div>
 
@@ -145,6 +155,7 @@ export default function OrderForm({ obj = {} }) {
           value={formInput.phone || ''}
           placeholder="0000000000"
           onChange={(e) => handleChange(e)}
+          name="phone"
         />
       </div>
 
@@ -152,8 +163,9 @@ export default function OrderForm({ obj = {} }) {
         <input 
             type="checkbox" 
             className="form-check-input" 
-            value={formInput.delivery === true || ''}
-            onChange={(e) => handleChange(e)}
+            checked={obj.delivery ? 'checked': ''}
+            onChange={() => handleCheck()}
+            name="delivery"
             />
 
         <label className="form-check-label" htmlFor="exampleCheck1">
@@ -161,21 +173,8 @@ export default function OrderForm({ obj = {} }) {
         </label>
       </div>
 
-      <div className="form-check">
-        <input 
-            type="checkbox" 
-            className="form-check-input" 
-            value={formInput.delivery === false || ''}
-            onChange={(e) => handleChange(e)}
-            />
-
-        <label className="form-check-label" htmlFor="exampleCheck1">
-          Pickup?
-        </label>
-      </div>
-
       <button type="submit" className="btn btn-primary">
-        Add Food!
+        {obj.id ? 'Update Food' : "Add Food!"}
       </button>
     </form>
   );

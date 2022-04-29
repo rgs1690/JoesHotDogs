@@ -51,7 +51,7 @@ namespace JoesHotDogs.Controllers
             }
         }
 
-        [HttpPatch]
+        [HttpPut]
         public IActionResult UpdateOrder(Order order)
         {
             int id = order.Id;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAllHotDogs } from '../api/hotDogData'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,16 +10,20 @@ const initialState = {
 }
 export default function CartForm({ obj = {} }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [hotDogOrders, setHotDogOrders] = useState();
   const [hotDogs, setHotDogs] = useState();
   const navigate = useNavigate();
   const { id } = useParams();
 
+
   useEffect(() => {
     getAllHotDogs().then((hotDogs) => {
         setHotDogs(hotDogs);
-    })  
- 
-  }, []);
+    });
+    if (obj.id) {
+
+    }
+  }, [obj]);
 
 
   
@@ -26,21 +31,16 @@ export default function CartForm({ obj = {} }) {
   
     return (
     <div>
-  
-  <div className="dropdown">
-  <button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    ADD SOME HOT DOGS!
-  </button>
-    {hotDogs?.map((hotdog) => (
-        
-  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <button button className="dropdown-item" key={hotdog.id} >{hotdog.name}</button>
-    
-  </div>
-  
-))}
-</div>
+        <select>
+            {hotDogs.map((hotdog) =>(
+                <option>{hotdog.name}</option>
+            ) )}
+        </select>
 </div>
     )
     
 }
+CartForm.propTypes = {
+    obj: PropTypes.shape({}),
+};
+CartForm.defaultProps = { obj : {} };
