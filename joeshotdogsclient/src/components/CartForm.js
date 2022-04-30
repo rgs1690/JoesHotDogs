@@ -28,9 +28,12 @@ console.log(id)
   
     return (
     <div>
-        <select>
-        
+        <select style= {{ width: '18rem' }}>
+        {hotDogs?.map((hotdog) => (
+            <option key={hotdog.id}>{hotdog.name}</option>
+        ))}
         </select>
+        <button  type="button" class="btn btn-success">Add to Order</button>
 </div>
     )
     
