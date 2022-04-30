@@ -1,11 +1,21 @@
-<!DOCTYPE html>
+import axios from "axios"
+const baseUrl = "https://localhost:7069/api/orders/hotDogOrder"
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+const getAllHotDogOrders = () => new Promise((resolve, reject) => {
+    axios 
+        .get(`${baseUrl}`)
+        .then((response) => resolve(Object.values(response.data)))
+        .catch(reject)
+        
+})
 
-</body>
-</html>
+const getHotDogOrderByOrderId = (orderId) => new Promise((resolve, reject) => {
+    getAllHotDogOrders()
+        .then((array) => {
+            const filteredArray = array.filter((hotDogOrder) => hotDogOrder.orderId === orderId);
+            resolve(filteredArray);
+        })
+        .catch(reject);
+});
+
+export default getHotDogOrderByOrderId; 

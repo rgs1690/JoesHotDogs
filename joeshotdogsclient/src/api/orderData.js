@@ -17,16 +17,12 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
         .catch(reject);
 });
 
-const createOrder = (orderObj) => new Promise((resolve, reject) => {
+const createOrder = (newOrder) => new Promise((resolve, reject) => {
     axios
-        .post(`${baseURL}/orders`, orderObj)
+        .post(`${baseURL}/orders`, newOrder)
         .then((response) => {
-            const id = response.data.name;
-            axios
-                .patch(`${baseURL}/orders/${id}`, { id })
-                .then(() => {
-                    getAllOrders().then(resolve);
-                });
+          
+            resolve(response.data.name);
         })
         .catch(reject);
 });

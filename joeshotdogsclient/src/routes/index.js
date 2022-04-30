@@ -8,7 +8,8 @@ import Menu from '../views/Menu';
 import Orders from '../views/Orders';
 import Payment from '../views/Payment';
 import ThankYou from '../views/ThankYou';
-
+import CartForm from '../components/CartForm';
+import OrderForm from '../components/OrderForm';
 
 export default function Routing(){
 return (
@@ -22,6 +23,8 @@ return (
         <Route exact path="/Orders" element={<Orders/>}></Route>
         <Route exact path="/Payment" element={<Payment/>}></Route>
         <Route exact path="/ThankYou" element={<ThankYou/>}></Route>
+        <Route exact path="/CartForm/:id" element={<CartForm/>} />
+        <Route exact path="/OrderForm" element={<OrderForm/>} />
         </Routes>
 
     </div>
