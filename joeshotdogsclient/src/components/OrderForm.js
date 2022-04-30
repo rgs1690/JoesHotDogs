@@ -18,7 +18,7 @@ const initialState = {
   total: "",
 };
 export default function OrderForm({ obj = {} }) {
-  const [checked, setChecked] = useState();
+  const [checked, setChecked] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
   const navigate = useNavigate();
 
@@ -52,11 +52,14 @@ useEffect(() => {
       [e.target.name]: e.target.value,
     }));
   };
-const handleCheck = () => {
-    setChecked(!checked);
-    if (checked) {
-        obj.delivery = true;
-    }
+const handleCheck = (e) => {
+  if (checked) {
+    setChecked(false);
+  } else {
+
+    setChecked(true);
+  }
+  
 }
   const handleClick = (e) => {
     e.preventDefault();
@@ -70,7 +73,8 @@ const handleCheck = () => {
         ...formInput,
         date: new Date(),
         userId: 1,
-        total:1
+        total:0, 
+        delivery: handleCheck(),
       }).then((id) => {
           console.log(obj.id)
         resetForm();
@@ -163,7 +167,7 @@ const handleCheck = () => {
         <input 
             type="checkbox" 
             className="form-check-input" 
-            checked={obj.delivery ? 'checked': ''}
+            checked={obj.delivery}
             onChange={() => handleCheck()}
             name="delivery"
             />

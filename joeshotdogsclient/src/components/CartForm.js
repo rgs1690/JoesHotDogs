@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getAllHotDogs } from '../api/hotDogData'
 import "bootstrap/dist/css/bootstrap.min.css";
 import getHotDogOrderByOrderId from '../api/hotDogOrderData';
@@ -13,7 +13,6 @@ export default function CartForm({ obj = {} }) {
   const [formInput, setFormInput] = useState(initialState);
   const [hotDogOrders, setHotDogOrders] = useState();
   const [hotDogs, setHotDogs] = useState();
-  const navigate = useNavigate();
   const { id } = useParams();
 
 
