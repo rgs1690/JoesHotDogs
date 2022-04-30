@@ -17,16 +17,20 @@ export default function Orders(){
     return (
       <div>
         {orders.map((order) => (
-            <div class="card">
-  <div class="card-header">
-  <h4 class="card-title">Order Number: {order.id}</h4>
-  <p class="card-text">Order Total: {order.total}</p>
-    <p class="card-text">Date: {order.date}</p>
-    <p class="card-text">Status: {order.status}</p>
-    <p class="card-text">Delivery: {order.delivery}</p>
-    <p class="card-text">Order Name: {order.nameOnCard}</p>
-  </div>
-  </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Order Number: {order.id}</h4>
+              <p class="card-text">Order Total: {order.total}</p>
+              <p class="card-text">Date: {order.date}</p>
+              <p class="card-text">Status: {order.status}</p>
+              <p class="card-text">Delivery: {order.delivery}</p>
+              <p class="card-text">Order Name: {order.nameOnCard}</p>
+                    <div>
+                        <button type="button" className="btn btn-warning">Update Order</button>
+                        <button type="button" class="btn btn-danger">Delet Order</button>
+                </div>
+           </div>
+         </div>
         ))}
         </div>
     );
