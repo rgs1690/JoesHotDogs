@@ -51,7 +51,7 @@ namespace JoesHotDogs.Controllers
             }
         }
 
-        [HttpPatch]
+        [HttpPut]
         public IActionResult UpdateOrder(Order order)
         {
             int id = order.Id;
@@ -87,6 +87,7 @@ namespace JoesHotDogs.Controllers
             }
             return Ok(matches);
         }
+        
         [HttpGet("hotDogOrder/{orderId}")]
         public IActionResult GetHotDogOrdersByOrderId(int orderId)
         {
