@@ -21,7 +21,8 @@ const createOrder = (newOrder) => new Promise((resolve, reject) => {
     axios
         .post(`${baseURL}/orders`, newOrder)
         .then((response) => {
-            resolve(response.data);
+          
+            resolve(response.data.name);
         })
         .catch(reject);
 });

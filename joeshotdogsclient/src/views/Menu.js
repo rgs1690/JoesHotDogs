@@ -7,7 +7,7 @@ export default function Menu() {
 
     useEffect(() => {
         getAllHotDogs().then((array) => {
-            setHotDogs(hotDogs);
+            setHotDogs(array);
         });
     }, []);
 
@@ -16,7 +16,7 @@ export default function Menu() {
             <div>
                <h1>Look at these DOGS!</h1>
                 <div>
-                    {hotDogs?.map((hotDog) => (
+                    {hotDogs.map((hotDog) => (
                         <HotDogCards
                             key={hotDog.id}
                             hotDog={hotDog}

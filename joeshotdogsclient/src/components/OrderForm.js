@@ -72,7 +72,7 @@ const handleCheck = () => {
         userId: 1,
         total:1
       }).then((id) => {
-          console.log(id)
+          console.log(obj.id)
         resetForm();
         navigate(`/CartForm/${id}`);
       });

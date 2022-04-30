@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAllHotDogs } from '../api/hotDogData'
 import "bootstrap/dist/css/bootstrap.min.css";
+import getHotDogOrderByOrderId from '../api/hotDogOrderData';
 
 const initialState = {
     hotDogId: '',
@@ -20,21 +21,16 @@ export default function CartForm({ obj = {} }) {
     getAllHotDogs().then((hotDogs) => {
         setHotDogs(hotDogs);
     });
-    if (obj.id) {
+    getHotDogOrderByOrderId(id).then(setHotDogOrders);
+  }, [id]);
 
-    }
-  }, [obj]);
-
-
-  
+console.log(id)
   
   
     return (
     <div>
         <select>
-            {hotDogs.map((hotdog) =>(
-                <option>{hotdog.name}</option>
-            ) )}
+        
         </select>
 </div>
     )
