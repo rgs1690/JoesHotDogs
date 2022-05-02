@@ -244,6 +244,36 @@ namespace JoesHotDogs.Repos
 
         }
 
+        public List<HotDogOrder> GetAllHotDogOrders()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, orderId, hotDogId
+                        FROM [HotDogOrder]
+                        ";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
+                    while (reader.Read())
+                    {
+                        HotDogOrder hotDogOrder = new HotDogOrder()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
+                            HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId"))
+                        };
+                        hotDogOrders.Add(hotDogOrder);
+                    }
+                    reader.Close();
+                    return hotDogOrders;
+                }
+            }
+        }
+
         public List<HotDogOrder> GetHotDogOrdersByOrderId(int orderId)
         {
             using (SqlConnection conn = Connection)

@@ -10,11 +10,9 @@ const getAllHotDogOrders = () => new Promise((resolve, reject) => {
 })
 
 const getHotDogOrderByOrderId = (orderId) => new Promise((resolve, reject) => {
-    getAllHotDogOrders()
-        .then((array) => {
-            const filteredArray = array.filter((hotDogOrder) => hotDogOrder.orderId === orderId);
-            resolve(filteredArray);
-        })
+  axios
+    .get(`${baseUrl}/${orderId}`)
+    .then((response) => resolve(Object.values(response.data)))
         .catch(reject);
 });
 
