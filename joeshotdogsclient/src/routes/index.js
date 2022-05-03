@@ -10,6 +10,7 @@ import Payment from '../views/Payment';
 import ThankYou from '../views/ThankYou';
 import CartForm from '../components/CartForm';
 import OrderForm from '../components/OrderForm';
+import EditOrder from '../views/EditOrder';
 
 export default function Routing(){
 return (
@@ -25,6 +26,7 @@ return (
         <Route exact path="/ThankYou" element={<ThankYou/>}></Route>
         <Route exact path="/CartForm/:id" element={<CartForm/>} />
         <Route exact path="/OrderForm" element={<OrderForm/>} />
+        <Route exact path="/editorder/:key" element={<EditOrder/>} />
         </Routes>
 
     </div>
