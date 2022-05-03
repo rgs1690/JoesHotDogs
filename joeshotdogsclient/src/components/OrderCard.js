@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import Proptypes from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {useNavigate} from 'react-router-dom'
-import { Link } from 'react-router-dom';
-import { deleteOrder, updateOrder } from '../api/orderData';
+/*import { Link } from 'react-router-dom';*/
+import { deleteOrder} from '../api/orderData';
 
 export default function OrderCard({order, setOrders}) {
-    const [checked, setChecked] = useState();
-
-
+    const navigate = useNavigate();
+    const handleInfo = () => {
+        navigate(`/orders/${order.id}`)
+    }
     const handleClick = (method) => {
         if (method === 'delete') {
             deleteOrder(order).then(setOrders);
         }
     }
     return (
-        <div>
+        <>
                 <div className="card">
                     <div className="card-header">
                         <h4 className="card-title">Order Number: {order.id}</h4>
@@ -24,12 +25,18 @@ export default function OrderCard({order, setOrders}) {
                         <p className="card-text">Delivery: {order.delivery}</p>
                         <p className="card-text">Order Name: {order.nameOnCard}</p>
                         <div>
-                            <button type="button" className="btn btn-warning">Update Order</button>
+                        <button type="button" className="btn btn-warning">Update Order</button>
+                        <button type="button" onClick={() => handleInfo('info')}className="btn btn-info">Info</button>
                         <button type="button" onClick={() => handleClick('delete') }className="btn btn-danger">Delet Order</button>
                         </div>
                     </div>
                 </div>
-            )}
-        </div>
+            
+        </>
     );
 }
+
+OrderCard.propTypes = {
+ order: PropTypes.shape(PropTypes.obj).isRequired,
+ setOrders: PropTypes.func.isRequired,
+};
