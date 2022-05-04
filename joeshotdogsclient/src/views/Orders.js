@@ -4,7 +4,6 @@ import OrderCard from '../components/OrderCard';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         getAllOrders().then((array) => {
@@ -21,6 +20,7 @@ export default function Orders() {
                             <OrderCard
                                 key={order.id}
                                 order={order}
+                                setOrders={setOrders}
                             />
                         ))}
                     </div>
