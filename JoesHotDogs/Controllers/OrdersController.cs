@@ -87,13 +87,8 @@ namespace JoesHotDogs.Controllers
             }
             return Ok(matches);
         }
-        [HttpGet("hotDogOrder")]
-        public IActionResult GetAllHotDogOrders()
-        {
-            List<HotDogOrder> hotDogOrders = _orderRepo.GetAllHotDogOrders();
-            if (hotDogOrders == null) return NotFound();
-            return Ok(hotDogOrders);
-        }
+
+        
 
         [HttpGet("hotDogOrder/{orderId}")]
         public IActionResult GetHotDogOrdersByOrderId(int orderId)

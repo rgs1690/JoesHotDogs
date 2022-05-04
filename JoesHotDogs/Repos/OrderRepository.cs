@@ -244,35 +244,7 @@ namespace JoesHotDogs.Repos
 
         }
 
-        public List<HotDogOrder> GetAllHotDogOrders()
-        {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        SELECT Id, orderId, hotDogId
-                        FROM [HotDogOrder]
-                        ";
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    List<HotDogOrder> hotDogOrders = new List<HotDogOrder>();
-                    while (reader.Read())
-                    {
-                        HotDogOrder hotDogOrder = new HotDogOrder()
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
-                            HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId"))
-                        };
-                        hotDogOrders.Add(hotDogOrder);
-                    }
-                    reader.Close();
-                    return hotDogOrders;
-                }
-            }
-        }
+        
 
         public List<HotDogOrder> GetHotDogOrdersByOrderId(int orderId)
         {
@@ -283,7 +255,7 @@ namespace JoesHotDogs.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-			    SELECT HotDog.Id, HotDogOrder.Id, HotDog.[Name],HotDogOrder.OrderId, [Order].Id, [Order].Total, [Order].nameOnCard, HotDogOrder.HotDogId
+			    SELECT HotDog.Id AS HotDogId, HotDogOrder.Id as HotDogOrderId, HotDog.[Name],HotDogOrder.OrderId, [Order].nameOnCard
                 FROM HotDogOrder
                 LEFT JOIN HotDog ON HotDog.Id = HotDogOrder.hotDogId
                 LEFT JOIN [Order] ON [Order].Id = HotDogOrder.orderId
@@ -296,9 +268,10 @@ namespace JoesHotDogs.Repos
                     {
                         HotDogOrder hotDogOrder = new HotDogOrder()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("HotDogOrderId")),
                             OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
                             HotDogId = reader.GetInt32(reader.GetOrdinal("HotDogId")),
+                            HotDogName= reader.GetString(reader.GetOrdinal("Name")),
                         };
                         hotDogOrders.Add(hotDogOrder);
                     }
