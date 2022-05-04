@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { getAllHotDogs, getHotDogById } from "../api/hotDogData";
+import { getAllHotDogs } from "../api/hotDogData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import getHotDogOrderByOrderId from "../api/hotDogOrderData";
 import { getSingleOrder } from "../api/orderData";
@@ -11,14 +11,13 @@ const initialState = {
   orderId: "",
 };
 export default function CartForm({ obj = {} }) {
-  const [formInput, setFormInput] = useState(initialState);
   const [hotDogOrders, setHotDogOrders] = useState([]);
   const [hotDogs, setHotDogs] = useState([]);
-  const [order, setOrder] = useState();
+  const [order, setOrder] = useState({});
   const { id } = useParams();
-
+  console.log(id);
   useEffect(() => {
-    getSingleOrder(id).then(setOrder);
+    getSingleOrder(id).then((order) => setOrder(order));
     getAllHotDogs().then((hotDogs) => {
       setHotDogs(hotDogs);
     });
@@ -31,9 +30,9 @@ export default function CartForm({ obj = {} }) {
   return (
     <>
       <div>
-          <h2>ORDER #: {order.id}</h2>
+        <h2>Your Order # {order.id}</h2>
         {hotDogOrders?.map((hotdog) => (
-          <p key={hotdog.id}>{hotdog.hotDogName}</p>
+          <p key={hotdog.Id}>{hotdog.hotDogName}</p>
         ))}
       </div>
       <div></div>
@@ -43,7 +42,7 @@ export default function CartForm({ obj = {} }) {
             <option key={hotdog.id}>{hotdog.name}</option>
           ))}
         </select>
-        <h2>Order Total: {order.total}</h2>
+        <h2>Order Total:{order.total} </h2>
         <button type="button" className="btn btn-success">
           Add to Order
         </button>
@@ -66,4 +65,3 @@ CartForm.defaultProps = { obj: {} };
 // display hot dogs to html when added
 // add a submit order button that closes the order and hides the update and delete options and writes
 //closed on the order card.
-// get order buy orderId useParams as Id then get allHotDogOrdersby Order Id map over then to display
