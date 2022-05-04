@@ -14,6 +14,7 @@
         public string Phone { get; set; }
         public string Date { get; set; }
         public bool Status { get; set; }
+        
     }
    
 }
