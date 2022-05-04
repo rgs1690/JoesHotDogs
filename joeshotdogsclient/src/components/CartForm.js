@@ -15,9 +15,9 @@ export default function CartForm({ obj = {} }) {
   const [hotDogs, setHotDogs] = useState([]);
   const [order, setOrder] = useState({});
   const { id } = useParams();
-    console.log(id);
+  console.log(id);
   useEffect(() => {
-    getSingleOrder(id).then((order) =>setOrder(order));
+    getSingleOrder(id).then((order) => setOrder(order));
     getAllHotDogs().then((hotDogs) => {
       setHotDogs(hotDogs);
     });
@@ -26,11 +26,11 @@ export default function CartForm({ obj = {} }) {
       console.log(hotDogOrders);
     });
   }, []);
-console.log(order)
+
   return (
     <>
       <div>
-          <h2>Your Order # {order.id}</h2>
+        <h2>Your Order # {order.id}</h2>
         {hotDogOrders?.map((hotdog) => (
           <p key={hotdog.Id}>{hotdog.hotDogName}</p>
         ))}
@@ -65,4 +65,3 @@ CartForm.defaultProps = { obj: {} };
 // display hot dogs to html when added
 // add a submit order button that closes the order and hides the update and delete options and writes
 //closed on the order card.
-
