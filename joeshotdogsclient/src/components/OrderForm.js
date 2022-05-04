@@ -76,7 +76,7 @@ const handleCheck = (e) => {
         total:0, 
         delivery: handleCheck(),
       }).then((id) => {
-          console.log(obj.id)
+          console.log(id)
         resetForm();
         navigate(`/CartForm/${id}`);
       });
