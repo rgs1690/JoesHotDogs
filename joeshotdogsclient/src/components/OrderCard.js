@@ -40,3 +40,4 @@ OrderCard.propTypes = {
  order: PropTypes.shape(PropTypes.obj).isRequired,
  setOrders: PropTypes.func.isRequired,
 };
+OrderCard.defaultProps = { obj { }};

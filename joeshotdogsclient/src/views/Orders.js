@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getAllOrders } from '../api/orderData';
-import { useParams } from 'react-router-dom';
 import OrderCard from '../components/OrderCard';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
-    const { key } = useParams();
-
     useEffect(() => {
         getAllOrders().then((array) => {
             setOrders(array);
