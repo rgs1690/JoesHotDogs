@@ -8,7 +8,6 @@ export default function OrderCard({order, setOrders}) {
     const handleClick = (method) => {
         if (method === 'delete') {
             deleteOrder(order).then(setOrders);
-            console.log(order)
         } else if (method === 'edit') {
             navigate(`/editOrder/${order.id}`)
         }
