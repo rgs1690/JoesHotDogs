@@ -24,7 +24,7 @@ export default function OrderForm({ obj = {} }) {
 
   
 useEffect(() => {
-    if (obj.id) {
+    if (obj.id) { 
       setFormInput({
         id: obj.id,
         cardNum: obj.cardNum,

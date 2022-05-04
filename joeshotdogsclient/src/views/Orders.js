@@ -20,7 +20,7 @@ export default function Orders(){
     return (
       <div>
         {orders.map((order) => (
-          <div className="card">
+          <div className="card" key={order.id}>
             <div className="card-header">
               <h4 className="card-title">Order Number: {order.id}</h4>
               <p className="card-text">Order Total: {order.total}</p>
