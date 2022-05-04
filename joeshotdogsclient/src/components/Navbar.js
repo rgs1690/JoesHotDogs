@@ -31,11 +31,7 @@ function Navbar() {
             <a className="nav-link" href="#">
               Cart
             </a>
-<<<<<<< HEAD
-            <a className="nav-link" href="/orders">
-=======
                       <a className="nav-link" href="/Orders">
->>>>>>> main
               Orders
             </a>
             <a className="nav-link" href="#">
