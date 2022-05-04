@@ -22,7 +22,7 @@ const createOrder = (newOrder) => new Promise((resolve, reject) => {
         .post(`${baseURL}/orders`, newOrder)
         .then((response) => {
           
-            resolve(response.data.name);
+            resolve(response.data.id);
         })
         .catch(reject);
 });
