@@ -20,7 +20,7 @@ return (
         <Route exact path="/hotdogs/:key" element={<HotDogDetails/>}></Route>
         <Route exact path="/Login" element={<Login/>}></Route>
         <Route exact path="/Menu" element={<Menu/>}></Route>
-        <Route exact path="/Orders" element={<Orders/>}></Route>
+        <Route exact path="/Orders" element={<Orders />}></Route>
         <Route exact path="/Payment" element={<Payment/>}></Route>
         <Route exact path="/ThankYou" element={<ThankYou/>}></Route>
         <Route exact path="/CartForm/:id" element={<CartForm/>} />
