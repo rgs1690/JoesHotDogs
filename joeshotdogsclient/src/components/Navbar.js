@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/js/src/collapse";
+import { signOutUser } from "../api/auth/auth";
 
 function Navbar() {
   return (
@@ -34,9 +35,10 @@ function Navbar() {
                       <a className="nav-link" href="/Orders">
               Orders
             </a>
-            <a className="nav-link" href="#">
+            <button className="btn btn-danger"
+            onClick={signOutUser}>
               Log Out
-            </a>
+            </button>
           </div>
         </div>
       </div>

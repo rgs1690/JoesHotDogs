@@ -30,14 +30,14 @@ const createOrder = (newOrder) => new Promise((resolve, reject) => {
 
 const updateOrder = (orderObj) => new Promise((resolve, reject) => {
     axios
-        .patch(`${baseURL}/orders/${orderObj.id}`, orderObj)
+        .put(`${baseURL}/orders/${orderObj.id}`, orderObj)
         .then(() => getAllOrders().then(resolve))
         .catch(reject);
 });
 
 const deleteOrder = (id) => new Promise((resolve, reject) => {
     axios
-        .delete(`${baseURL}/orders.${id}`)
+        .delete(`${baseURL}/orders/${id}`)
         .then(() => getAllOrders().then(resolve))
         .catch(reject);
 });
