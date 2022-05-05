@@ -35,7 +35,7 @@ function Navbar() {
                       <a className="nav-link" href="/Orders">
               Orders
             </a>
-            <button className="danger"
+            <button className="btn btn-danger"
             onClick={signOutUser}>
               Log Out
             </button>
