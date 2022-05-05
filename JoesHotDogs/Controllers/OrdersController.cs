@@ -102,7 +102,7 @@ namespace JoesHotDogs.Controllers
         }
        
         
-        [HttpPost("hotDogOrder")]
+        [HttpPost("orders/hotDogOrder")]
         public IActionResult CreateNewHotDogOrder(HotDogOrder newHotDogOrder)
         {
             if (newHotDogOrder == null)

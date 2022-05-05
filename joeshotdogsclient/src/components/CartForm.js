@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { getAllHotDogs } from "../api/hotDogData";
 import "bootstrap/dist/css/bootstrap.min.css";
-import getHotDogOrderByOrderId from "../api/hotDogOrderData";
+import { createHotDogOrder, getHotDogOrderByOrderId } from "../api/hotDogOrderData";
 import { getSingleOrder } from "../api/orderData";
 
 const initialState = {
@@ -12,10 +12,11 @@ const initialState = {
 };
 export default function CartForm({ obj = {} }) {
   const [hotDogOrders, setHotDogOrders] = useState([]);
+  const [newHDO, setHDO] = useState({});
   const [hotDogs, setHotDogs] = useState([]);
   const [order, setOrder] = useState({});
   const { id } = useParams();
-  console.log(id);
+
   useEffect(() => {
     getSingleOrder(id).then((order) => setOrder(order));
     getAllHotDogs().then((hotDogs) => {
@@ -23,9 +24,17 @@ export default function CartForm({ obj = {} }) {
     });
     getHotDogOrderByOrderId(id).then((hotDogOrders) => {
       setHotDogOrders(hotDogOrders);
-      console.log(hotDogOrders);
     });
   }, []);
+
+  const handleAddDog = () => {
+    console.log(newHDO);
+    createHotDogOrder(newHDO).then(setHotDogOrders);
+  };
+
+  const changeDog = (newDog) => {
+    setHDO(newDog);
+  }
 
   return (
     <>
@@ -37,13 +46,17 @@ export default function CartForm({ obj = {} }) {
       </div>
       <div></div>
       <div>
-        <select style={{ width: "18rem" }}>
+        <select
+        style={{ width: "18rem" }}
+        onChange={(event) => changeDog(event.target.value)}
+        value={newHDO}
+        >
           {hotDogs?.map((hotdog) => (
             <option key={hotdog.id}>{hotdog.name}</option>
           ))}
         </select>
         <h2>Order Total:{order.total} </h2>
-        <button type="button" className="btn btn-success">
+        <button type="button" className="btn btn-success" onClick={handleAddDog}>
           Add to Order
         </button>
       </div>
