@@ -30,7 +30,7 @@ const createOrder = (newOrder) => new Promise((resolve, reject) => {
 
 const updateOrder = (orderObj) => new Promise((resolve, reject) => {
     axios
-        .patch(`${baseURL}/orders/${orderObj.id}`, orderObj)
+        .put(`${baseURL}/orders/${orderObj.id}`, orderObj)
         .then(() => getAllOrders().then(resolve))
         .catch(reject);
 });

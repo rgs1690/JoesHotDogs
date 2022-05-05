@@ -1,13 +1,37 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Routing from './routes';
 import Navbar from './components/Navbar';
 import './App.css';
+import Login from './views/Login';
+import auth from './api/auth/apiKeys';
+
 
 function App() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    auth().onAuthStateChanged((authed) => {
+      if (authed) {
+        const userInfoObj = {
+          id: authed.uid,
+        };
+        setUser(userInfoObj);
+        console.warn(userInfoObj.uid);
+      } else if (user || user === null) {
+        setUser(false);
+      }
+    });
+  }, []);
   return (
     <div>
-      <Navbar />
-      <Routing />
+      {user ? (
+        <>
+        <Navbar />
+        <Routing uid={user.id} />
+        
+        </>
+      ): (
+        <Login user={user}/>
+      )}
       </div>
       
   );
