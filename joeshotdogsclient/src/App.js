@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import Routing from './routes';
-import Navbar from './components/Navbar';
-import './App.css';
-import Login from './views/Login';
-import auth from './api/auth/apiKeys';
+import React, { useState, useEffect } from "react";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import Routing from "./routes";
+import Navbar from "./components/Navbar";
+import "./App.css";
+import Login from "./views/Login";
 
-console.log(auth.onAuthStateChanged)
 function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -27,15 +25,13 @@ function App() {
     <div>
       {user ? (
         <>
-        <Navbar />
-        <Routing uid={user.id} />
-        
+          <Navbar />
+          <Routing uid={user.id} />
         </>
-      ): (
-        <Login user={user}/>
+      ) : (
+        <Login user={user} />
       )}
-      </div>
-      
+    </div>
   );
 }
 
