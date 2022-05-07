@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { getAllHotDogs, getHotDogById } from "../api/hotDogData";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createHotDogOrder, getHotDogOrderByOrderId } from "../api/hotDogOrderData";
+import {
+  createHotDogOrder,
+  getHotDogOrderByOrderId,
+} from "../api/hotDogOrderData";
 import { getSingleOrder } from "../api/orderData";
-
 
 export default function CartForm({ obj = {} }) {
   const [hotDogOrders, setHotDogOrders] = useState([]);
@@ -22,32 +24,31 @@ export default function CartForm({ obj = {} }) {
     getHotDogOrderByOrderId(id).then((hotDogOrders) => {
       setHotDogOrders(hotDogOrders);
     });
-  }, [id]);
+  }, [newHDO]);
   const totalOrder = () => {
-    return  hotDogOrders.length * 5;
- }
- order.total = totalOrder();
+    return hotDogOrders.length * 5;
+  };
+  order.total = totalOrder();
   const handleAddDog = () => {
-    console.log('sending');
+    console.log("sending");
     console.log(newHDO);
-    createHotDogOrder(newHDO).then(getHotDogOrderByOrderId(order.id).then(setHotDogOrders));
+    createHotDogOrder(newHDO).then(
+      getHotDogOrderByOrderId(order.id).then(setHotDogOrders)
+    );
   };
 
   const changeDog = (newDogId) => {
-
     getHotDogById(newDogId).then((res) => {
-      console.log('changing');
+      console.log("changing");
       console.log(res);
-      setHDO(
-        {
-          id: 6,
-          orderId: order.id,
-          hotDogId: res.id,
-          HotDogName: res.name
-        }
-      );;
+      setHDO({
+        id: 6,
+        orderId: order.id,
+        hotDogId: res.id,
+        HotDogName: res.name,
+      });
     });
-  }
+  };
 
   return (
     <>
@@ -60,16 +61,23 @@ export default function CartForm({ obj = {} }) {
       <div></div>
       <div>
         <select
-        style={{ width: "18rem" }}
-        onChange={(event) => changeDog(event.target.value)}
-        value={newHDO}
+          style={{ width: "18rem" }}
+          onChange={(event) => changeDog(event.target.value)}
+          value={newHDO}
         >
+          <option></option>
           {hotDogs?.map((hotdog) => (
-            <option key={hotdog.id} value={hotdog.id}>{hotdog.name}</option>
+            <option key={hotdog.id} value={hotdog.id}>
+              {hotdog.name}
+            </option>
           ))}
         </select>
         <h2>Order Total:{order.total} </h2>
-        <button type="button" className="btn btn-success" onClick={handleAddDog}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={handleAddDog}
+        >
           Add to Order
         </button>
       </div>
@@ -85,8 +93,6 @@ CartForm.propTypes = {
   obj: PropTypes.shape({}),
 };
 CartForm.defaultProps = { obj: {} };
-
-
 
 // add a submit order button that closes the order and hides the update and delete options and writes
 //closed on the order card.
