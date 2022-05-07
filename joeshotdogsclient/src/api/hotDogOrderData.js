@@ -9,4 +9,14 @@ const getHotDogOrderByOrderId = (orderId) =>
       .catch(reject);
   });
 
-export default getHotDogOrderByOrderId;
+  const createHotDogOrder = (obj) => new Promise((resolve, reject) => {
+    axios
+    .post(`${baseUrl}`, obj)
+    .then((response) => {
+      console.log(obj);
+      resolve(response.data.id);
+  })
+  .catch(reject);
+  });
+
+export { getHotDogOrderByOrderId, createHotDogOrder };
