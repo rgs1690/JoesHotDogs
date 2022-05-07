@@ -71,7 +71,7 @@ namespace JoesHotDogs.Controllers
     
 
 
-        [HttpDelete("orders/{id}")]
+        [HttpDelete("{id}")]
         public void Delete(int id)
         {
             _orderRepo.DeleteOrder(id);
