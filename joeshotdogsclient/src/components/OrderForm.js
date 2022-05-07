@@ -65,8 +65,9 @@ const handleCheck = (e) => {
     e.preventDefault();
 
     if (obj.id) {
-        updateOrder(formInput).then(() => {
-            navigate("/Orders");
+        updateOrder(formInput).then((res) => {
+        console.log(formInput.id)
+          navigate(`/CartForm/${formInput.id}`);
       })
     } else {
       createOrder({

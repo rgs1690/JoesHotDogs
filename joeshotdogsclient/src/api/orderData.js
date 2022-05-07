@@ -2,7 +2,7 @@ import axios from 'axios';
 //import databaseConfig from './auth/apiKeys';
 
 const baseURL = "https://localhost:7069/api";
-
+// set rules in firebase 
 const getAllOrders = () => new Promise((resolve, reject) => {
     axios 
        .get(`${baseURL}/orders`)

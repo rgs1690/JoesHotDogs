@@ -51,7 +51,7 @@ namespace JoesHotDogs.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult UpdateOrder(Order order)
         {
             int id = order.Id;
@@ -63,7 +63,7 @@ namespace JoesHotDogs.Controllers
             }
             else
             {
-                _orderRepo.UpdateOrder(order);
+                _orderRepo.UpdateOrder(match);
                 return Ok(order);
             }
             
