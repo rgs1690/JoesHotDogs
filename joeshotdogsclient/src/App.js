@@ -15,7 +15,7 @@ function App() {
           id: authed.uid,
         };
         setUser(userInfoObj);
-        console.warn(userInfoObj.uid);
+        console.warn(user);
       } else if (user || user === null) {
         setUser(false);
       }
@@ -26,7 +26,7 @@ function App() {
       {user ? (
         <>
           <Navbar />
-          <Routing uid={user.id} />
+          <Routing />
         </>
       ) : (
         <Login user={user} />
