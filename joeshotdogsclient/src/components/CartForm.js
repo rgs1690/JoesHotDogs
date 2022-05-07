@@ -26,6 +26,10 @@ export default function CartForm({ obj = {} }) {
       console.log(hotDogOrders);
     });
   }, []);
+  const totalOrder = () => {
+    return  hotDogOrders.length * 5;
+ }
+ order.total = totalOrder();
 
   return (
     <>
