@@ -117,7 +117,7 @@ namespace JoesHotDogs.Controllers
         }
 
 
-        [HttpPatch("hotDogOrder")]
+        [HttpPatch("hotDogOrder/{id}")]
         public IActionResult UpdateHotDogOrder(HotDogOrder hotDogOrder)
         {
             int id = hotDogOrder.Id;
