@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { createOrder, updateOrder } from "../api/orderData";
 import "bootstrap/js/src/collapse";
+import getCurrentUsersUid from "../helpers/helpers";
 
 const initialState = {
   cardNum: "",
@@ -21,7 +22,7 @@ export default function OrderForm({ obj = {} }) {
   const [checked, setChecked] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
   const navigate = useNavigate();
-
+  const UID = getCurrentUsersUid();
   
 useEffect(() => {
     if (obj.id) { 
@@ -73,11 +74,12 @@ const handleCheck = (e) => {
       createOrder({
         ...formInput,
         date: new Date(),
-        userId: 1,
+        userId: UID,
         total:0, 
         delivery: handleCheck(),
       }).then((id) => {
           console.log(id)
+          console.log(UID);
         resetForm();
         navigate(`/CartForm/${id}`);
       });

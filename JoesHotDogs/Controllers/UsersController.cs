@@ -17,7 +17,7 @@ namespace JoesHotDogs.Controllers
         }
 
         // GET: UserController/5
-        [HttpGet("Id/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
             User user = _userRepo.GetUserById(id);

@@ -2,7 +2,7 @@ import axios from 'axios';
 //import databaseConfig from './auth/apiKeys';
 
 const baseURL = "https://localhost:7069/api";
-// set rules in firebase 
+ 
 const getAllOrders = () => new Promise((resolve, reject) => {
     axios 
        .get(`${baseURL}/orders`)
@@ -16,7 +16,12 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
         .then((response) => resolve(response.data))
         .catch(reject);
 });
-
+const getOrdersByUserId = (userId) => new Promise((resolve, reject) => {
+    axios
+        .get(`${baseURL}/user/${userId}`)
+        .then((response) => resolve(Object.values(response.data)))
+        .catch(reject);
+})
 const createOrder = (newOrder) => new Promise((resolve, reject) => {
     axios
         .post(`${baseURL}/orders`, newOrder)
@@ -31,16 +36,16 @@ const createOrder = (newOrder) => new Promise((resolve, reject) => {
 const updateOrder = (orderObj) => new Promise((resolve, reject) => {
     axios
         .put(`${baseURL}/orders/${orderObj.id}`, orderObj)
-        .then(() => getAllOrders().then(resolve))
+        .then(() => getOrdersByUserId(orderObj.userId).then(resolve))
         .catch(reject);
 });
 
-const deleteOrder = (id) => new Promise((resolve, reject) => {
+const deleteOrder = (id, userId) => new Promise((resolve, reject) => {
     axios
         .delete(`${baseURL}/orders/${id}`)
-        .then(() => getAllOrders().then(resolve))
+        .then(() => getOrdersByUserId(userId).then(resolve))
         .catch(reject);
 });
 
-export { getAllOrders, getSingleOrder, createOrder, updateOrder, deleteOrder };
+export { getAllOrders, getOrdersByUserId, getSingleOrder, createOrder, updateOrder, deleteOrder };
 
