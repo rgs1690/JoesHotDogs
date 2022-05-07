@@ -102,7 +102,7 @@ namespace JoesHotDogs.Controllers
         }
        
         
-        [HttpPost("orders/hotDogOrder")]
+        [HttpPost("hotDogOrder")]
         public IActionResult CreateNewHotDogOrder(HotDogOrder newHotDogOrder)
         {
             if (newHotDogOrder == null)
@@ -117,7 +117,7 @@ namespace JoesHotDogs.Controllers
         }
 
 
-        [HttpPatch("hotDogOrder")]
+        [HttpPatch("hotDogOrder/{id}")]
         public IActionResult UpdateHotDogOrder(HotDogOrder hotDogOrder)
         {
             int id = hotDogOrder.Id;
