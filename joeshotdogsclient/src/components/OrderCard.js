@@ -7,7 +7,8 @@ export default function OrderCard({order, setOrders}) {
     const navigate = useNavigate();
     const handleClick = (method) => {
         if (method === 'delete') {
-            deleteOrder(order).then(setOrders);
+            deleteOrder(order.id).then(setOrders);
+            console.log(order)
         } else if (method === 'edit') {
             navigate(`/editOrder/${order.id}`)
         }
@@ -24,7 +25,7 @@ export default function OrderCard({order, setOrders}) {
                         <p className="card-text">Order Name: {order.nameOnCard}</p>
                         <div>
                         <button type="button" onClick={() => handleClick('edit')} className="btn btn-warning">Update Order</button>
-                        <button type="button" onClick={() => handleClick('delete') } className="btn btn-danger">Delet Order</button>
+                        <button type="button" onClick={() => handleClick('delete') } className="btn btn-danger">Delete Order</button>
                         </div>
                     </div>
                 </div>
