@@ -64,8 +64,7 @@ CartForm.propTypes = {
 };
 CartForm.defaultProps = { obj: {} };
 
-// Total the hotdogs for order.total and display on screen
-// Add Add new order button on menu that navigates to orderForm
-// display hot dogs to html when added
+
+
 // add a submit order button that closes the order and hides the update and delete options and writes
 //closed on the order card.
