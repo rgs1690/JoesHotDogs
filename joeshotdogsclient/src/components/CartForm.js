@@ -25,12 +25,12 @@ export default function CartForm({ obj = {} }) {
     getHotDogOrderByOrderId(id).then((hotDogOrders) => {
       setHotDogOrders(hotDogOrders);
     });
-  }, []);
+  }, [id]);
 
   const handleAddDog = () => {
     console.log('sending');
     console.log(newHDO);
-    createHotDogOrder(newHDO).then(setHotDogOrders);
+    createHotDogOrder(newHDO).then(getHotDogOrderByOrderId(order.id).then(setHotDogOrders));
   };
 
   const changeDog = (newDogId) => {
