@@ -26,13 +26,11 @@ export default function CartForm({ obj = {} }) {
       setHotDogOrders(hotDogOrders);
     });
   }, [newHDO]);
-  const totalOrder = () => {
-    return hotDogOrders.length * 5;
-  };
-  order.total = totalOrder();
+  const totalOrder = hotDogOrders.length * 5;
   const handleAddDog = () => {
     console.log("sending");
     console.log(newHDO);
+    console.log(newHDO.orderId);
     createHotDogOrder(newHDO).then(
       getHotDogOrderByOrderId(order.id).then(setHotDogOrders)
     );
@@ -55,13 +53,13 @@ export default function CartForm({ obj = {} }) {
     <>
       <div>
         <h2>Your Order # {order.id}</h2>
-        {hotDogOrders?.map((hdo) => {
+        {hotDogOrders?.map((hdo) => (
           <HDOCard 
           key={hdo.id}
           hdo={hdo}
-          setHDO={setHotDogOrders}
+          sethdos={setHotDogOrders}
           />
-        })}
+        ))}
       </div>
       <div></div>
       <div>
@@ -77,7 +75,7 @@ export default function CartForm({ obj = {} }) {
             </option>
           ))}
         </select>
-        <h2>Order Total:{order.total} </h2>
+        <h2>Order Total: {totalOrder} </h2>
         <button
           type="button"
           className="btn btn-success"

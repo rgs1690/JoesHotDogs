@@ -20,4 +20,11 @@ const createHotDogOrder = (obj) =>
       .catch(reject);
   });
 
-export { getHotDogOrderByOrderId, createHotDogOrder };
+  const deleteHotDogOrder = (id, orderId) => new Promise((resolve, reject) => {
+    axios
+      .delete(`${baseUrl}/${id}`)
+      .then(() => getHotDogOrderByOrderId(orderId).then(resolve))
+      .catch(reject);
+  });
+  
+export { getHotDogOrderByOrderId, createHotDogOrder, deleteHotDogOrder };
