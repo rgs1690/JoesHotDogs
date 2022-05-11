@@ -32,7 +32,7 @@ namespace JoesHotDogs.Repos
                                u.lastName,
                                u.email,
                                u.isAdmin
-                        FROM User u
+                        FROM [User] u
                     ";
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -42,7 +42,7 @@ namespace JoesHotDogs.Repos
                     {
                         User user = new User
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            Id = reader.GetString(reader.GetOrdinal("id")),
                             FirstName = reader.GetString(reader.GetOrdinal("firstName")),
                             LastName = reader.GetString(reader.GetOrdinal("lastName")),
                             Email = reader.GetString(reader.GetOrdinal("email")),
@@ -57,7 +57,7 @@ namespace JoesHotDogs.Repos
             }
         }
 
-      public User GetUserById(int id)
+      public User GetUserById(string id)
         {
              using (SqlConnection conn = Connection)
             {
@@ -77,7 +77,7 @@ namespace JoesHotDogs.Repos
                     {
                         User user = new User
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            Id = reader.GetString(reader.GetOrdinal("id")),
                             FirstName = reader.GetString(reader.GetOrdinal("firstName")),
                             LastName = reader.GetString(reader.GetOrdinal("lastName")),
                             Email = reader.GetString(reader.GetOrdinal("email")),
@@ -104,7 +104,7 @@ namespace JoesHotDogs.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO User (Id, FirstName, LastName, Email, IsAdmin)
+                        INSERT INTO [User] (Id, FirstName, LastName, Email, IsAdmin)
                         OUTPUT INSERTED.ID
                         VALUES (@id, @firstName, @lastName, @email, @isAdmin);
                     ";
@@ -115,9 +115,9 @@ namespace JoesHotDogs.Repos
                     cmd.Parameters.AddWithValue("@email", user.Email);
                     cmd.Parameters.AddWithValue("@isAdmin", user.IsAdmin);
 
-                    int id = (int)cmd.ExecuteScalar();
+                    cmd.ExecuteNonQuery();
 
-                    user.Id = id;
+
                 }
             }
         }
@@ -154,7 +154,7 @@ namespace JoesHotDogs.Repos
         }
 
 
-        public void DeleteUser(int id)
+        public void DeleteUser(string id)
         {
             using (SqlConnection conn = Connection)
             {

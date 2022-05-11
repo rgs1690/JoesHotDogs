@@ -10,7 +10,7 @@ namespace JoesHotDogs.Repos
         void CreateOrder(Order order);
         void UpdateOrder(Order order);
         void DeleteOrder(int id);
-        List<Order> GetOrdersByUserId(int UserId);
+        List<Order> GetOrdersByUserId(string UserId);
         List<HotDogOrder> GetHotDogOrdersByOrderId(int OrderId);
      
         void UpdateHotDogOrder(HotDogOrder hotDogOrder);
