@@ -23,9 +23,9 @@ export default function OrderForm({ obj = {} }) {
   const [formInput, setFormInput] = useState(initialState);
   const navigate = useNavigate();
   const UID = getCurrentUsersUid();
-  
-useEffect(() => {
-    if (obj.id) { 
+
+  useEffect(() => {
+    if (obj.id) {
       setFormInput({
         id: obj.id,
         cardNum: obj.cardNum,
@@ -53,33 +53,31 @@ useEffect(() => {
       [e.target.name]: e.target.value,
     }));
   };
-const handleCheck = (e) => {
-  if (checked) {
-    setChecked(false);
-  } else {
-
-    setChecked(true);
-  }
-  
-}
+  const handleCheck = (e) => {
+    if (checked) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
+  };
   const handleClick = (e) => {
     e.preventDefault();
 
     if (obj.id) {
-        updateOrder(formInput).then((res) => {
-        console.log(formInput.id)
-          navigate(`/CartForm/${formInput.id}`);
-      })
+      updateOrder(formInput).then((res) => {
+        console.log(formInput.id);
+        navigate(`/CartForm/${formInput.id}`);
+      });
     } else {
       createOrder({
         ...formInput,
         date: new Date(),
         userId: UID,
-        total:0, 
+        total: 0,
         delivery: handleCheck(),
       }).then((id) => {
-          console.log(id)
-          console.log(UID);
+        console.log(id);
+        console.log(UID);
         resetForm();
         navigate(`/CartForm/${id}`);
       });
@@ -93,7 +91,7 @@ const handleCheck = (e) => {
         <input
           type="text"
           className="form-control"
-          value={formInput.cardNum || ''}
+          value={formInput.cardNum || ""}
           aria-describedby="card number"
           placeholder="xxxxxxxxxx"
           onChange={(e) => handleChange(e)}
@@ -107,7 +105,7 @@ const handleCheck = (e) => {
         <input
           type="text"
           className="form-control"
-          value={formInput.expiration || ''}
+          value={formInput.expiration || ""}
           placeholder="00/00"
           onChange={(e) => handleChange(e)}
           name="expiration"
@@ -120,7 +118,7 @@ const handleCheck = (e) => {
         <input
           type="text"
           className="form-control"
-          value={formInput.nameOnCard || ''}
+          value={formInput.nameOnCard || ""}
           placeholder="Enter Name"
           onChange={(e) => handleChange(e)}
           name="nameOnCard"
@@ -133,7 +131,7 @@ const handleCheck = (e) => {
         <input
           type="text"
           className="form-control"
-          value={formInput.billingZip || ''}
+          value={formInput.billingZip || ""}
           placeholder="Enter Zip Code"
           onChange={(e) => handleChange(e)}
           name="billingZip"
@@ -146,7 +144,7 @@ const handleCheck = (e) => {
         <input
           type="text"
           className="form-control"
-          value={formInput.address || ''}
+          value={formInput.address || ""}
           placeholder="Enter Address"
           onChange={(e) => handleChange(e)}
           name="address"
@@ -159,7 +157,7 @@ const handleCheck = (e) => {
         <input
           type="text"
           className="form-control"
-          value={formInput.phone || ''}
+          value={formInput.phone || ""}
           placeholder="0000000000"
           onChange={(e) => handleChange(e)}
           name="phone"
@@ -167,13 +165,13 @@ const handleCheck = (e) => {
       </div>
 
       <div className="form-check">
-        <input 
-            type="checkbox" 
-            className="form-check-input" 
-            checked={obj.delivery}
-            onChange={() => handleCheck()}
-            name="delivery"
-            />
+        <input
+          type="checkbox"
+          className="form-check-input"
+          checked={obj.delivery}
+          onChange={() => handleCheck()}
+          name="delivery"
+        />
 
         <label className="form-check-label" htmlFor="exampleCheck1">
           Delivery?
@@ -181,13 +179,13 @@ const handleCheck = (e) => {
       </div>
 
       <button type="submit" className="btn btn-primary">
-        {obj.id ? 'Update Food' : "Add Food!"}
+        {obj.id ? "Update Food" : "Add Food!"}
       </button>
     </form>
   );
 }
 
 OrderForm.propTypes = {
-    obj: PropTypes.shape({}),
-}
-OrderForm.defaultProps = { obj: {} }
+  obj: PropTypes.shape({}),
+};
+OrderForm.defaultProps = { obj: {} };

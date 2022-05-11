@@ -3,7 +3,7 @@
     public class Order
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int Total { get; set; }
         public bool Delivery { get; set; }
         public string CardNum { get; set; }

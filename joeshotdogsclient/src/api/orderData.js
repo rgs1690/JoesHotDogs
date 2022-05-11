@@ -18,7 +18,7 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
 });
 const getOrdersByUserId = (userId) => new Promise((resolve, reject) => {
     axios
-        .get(`${baseURL}/user/${userId}`)
+        .get(`${baseURL}/orders/user/${userId}`)
         .then((response) => resolve(Object.values(response.data)))
         .catch(reject);
 })
