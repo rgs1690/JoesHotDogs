@@ -16,9 +16,18 @@ namespace JoesHotDogs.Controllers
             _userRepo = userRepository;
         }
 
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            List<User> users = _userRepo.GetUsers();
+            if (users == null) return NotFound();
+            return Ok(users);
+        }
+     
+
         // GET: UserController/5
-        [HttpGet("Id/{id}")]
-        public IActionResult GetUserById(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(string id)
         {
             User user = _userRepo.GetUserById(id);
 
@@ -29,6 +38,26 @@ namespace JoesHotDogs.Controllers
             return Ok(user);
         }
 
+        [HttpPost]
+        public IActionResult AddUser(User newUser)
+        {
+            if (newUser == null)
+                    {
+                return NotFound();
+
+            }
+            else
+            {
+                _userRepo.AddUser(newUser);
+                return Ok(newUser);
+            }
+        }
+        
+        
+        
+        
+        
+        
         //// GET: UserController/Create
         //public ActionResult Create()
         //{

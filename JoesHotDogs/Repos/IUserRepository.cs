@@ -5,9 +5,9 @@ namespace JoesHotDogs.Repos
     public interface IUserRepository
     {
         List<User> GetUsers();
-        User GetUserById(int id);
+        User GetUserById(string id);
         void AddUser(User user);
         void UpdateUser(User user);
-        void DeleteUser(int id);
+        void DeleteUser(string id);
     }
 }

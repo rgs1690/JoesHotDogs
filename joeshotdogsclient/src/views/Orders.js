@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { getAllOrders } from '../api/orderData';
-import OrderCard from '../components/OrderCard';
+import React, { useEffect, useState } from "react";
+import { getOrdersByUserId } from "../api/orderData";
+import OrderCard from "../components/OrderCard";
+import getCurrentUsersUid from "../helpers/helpers";
 
 export default function Orders() {
-    const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const UID = getCurrentUsersUid();
 
-    useEffect(() => {
-        getAllOrders().then((array) => {
-            setOrders(array);
+  useEffect(() => {
+    getOrdersByUserId(UID).then((array) => {
+      setOrders(array);
     });
-}, []);
+  }, []);
 
-    return (
-       <>
+  return (
+    <>
+      <div>
+        <h1>All Orders </h1>
+        {orders ? (
+          <>
             <div>
-                <h1>All Orders </h1>
-                    <div>
-                        {orders.map((order) => (
-                            <OrderCard
-                                key={order.id}
-                                order={order}
-                                setOrders={setOrders}
-                            />
-                        ))}
-                    </div>
-           </div>
-       </>
-           );
+              {orders?.map((order) => (
+                <OrderCard key={order.id} order={order} setOrders={setOrders} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <h2>You don't have any orders! Go to the menu to get some dogs!</h2>
+        )}
+      </div>
+    </>
+  );
 }

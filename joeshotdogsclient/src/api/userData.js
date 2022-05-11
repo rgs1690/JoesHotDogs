@@ -1,11 +1,29 @@
-<!DOCTYPE html>
+import axios from "axios";
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+const baseURL = "https://localhost:7069/api";
 
-</body>
-</html>
+const getAllUsers = () =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/user`)
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  });
+const getUserById = (id) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/user/${id}`)
+      .then((response) => resolve(response.data))
+      .catch(reject);
+  });
+const createUser = (newUser) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/user`, newUser)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch(reject);
+  });
+
+export { createUser, getAllUsers, getUserById };

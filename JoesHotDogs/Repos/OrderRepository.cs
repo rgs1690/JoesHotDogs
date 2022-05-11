@@ -44,7 +44,7 @@ namespace JoesHotDogs.Repos
                         Order order = new Order()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = reader.GetString(reader.GetOrdinal("CardNum")),
@@ -89,7 +89,7 @@ namespace JoesHotDogs.Repos
                         {
 
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = reader.GetString(reader.GetOrdinal("CardNum")),
@@ -200,7 +200,7 @@ namespace JoesHotDogs.Repos
         }
 
 
-        public List<Order> GetOrdersByUserId(int userId)
+        public List<Order> GetOrdersByUserId(string userId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -223,7 +223,7 @@ namespace JoesHotDogs.Repos
                         {
 
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = reader.GetString(reader.GetOrdinal("CardNum")),
