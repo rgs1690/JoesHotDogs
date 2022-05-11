@@ -89,7 +89,7 @@ namespace JoesHotDogs.Repos
                         {
 
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                            UserId = reader.GetString(reader.GetOrdinal("UserId")),
                             Total = (int)reader.GetInt64(reader.GetOrdinal("Total")),
                             Delivery = reader.GetBoolean(reader.GetOrdinal("Delivery")),
                             CardNum = reader.GetString(reader.GetOrdinal("CardNum")),

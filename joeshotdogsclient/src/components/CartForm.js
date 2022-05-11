@@ -5,6 +5,7 @@ import { getAllHotDogs, getHotDogById } from "../api/hotDogData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createHotDogOrder, getHotDogOrderByOrderId } from "../api/hotDogOrderData";
 import { getSingleOrder } from "../api/orderData";
+import HDOCard from "./HDOCard";
 
 const initialState = {
   hotDogId: "",
@@ -53,9 +54,13 @@ export default function CartForm({ obj = {} }) {
     <>
       <div>
         <h2>Your Order # {order.id}</h2>
-        {hotDogOrders?.map((hdo) => (
-          <p key={hdo.id}>{hdo.hotDogName}</p>
-        ))}
+        {hotDogOrders?.map((hdo) => {
+          <HDOCard 
+          key={hdo.id}
+          hdo={hdo}
+          setHDO={setHotDogOrders}
+          />
+        })}
       </div>
       <div></div>
       <div>
