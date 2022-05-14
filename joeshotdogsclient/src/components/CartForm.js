@@ -16,7 +16,6 @@ export default function CartForm( ) {
   const [newHDO, setHDO] = useState({});
   const [hotDogs, setHotDogs] = useState([]);
   const [order, setOrder] = useState({});
-  const [orders, setOrders] = [];
   const { id } = useParams();
   const navigate = useNavigate();
   const totalOrder = hotDogOrders.length * 5;
@@ -54,6 +53,12 @@ export default function CartForm( ) {
     });
   };
   const handleSubmit = (order) => {
+    setOrder({
+      ...order,
+      totat:totalOrder,
+      status: false
+    })
+    console.log(order)
     updateOrder({
       id: order.id,
       userId: UID,
@@ -67,12 +72,12 @@ export default function CartForm( ) {
       total: totalOrder,
       status: false,
     delivery: order.delivery,
-    }).then(() => {
-        
+    }).then((res) => {
+          console.log(res);
           navigate("/orders");
         })
 
-  
+
   };
 
   return (
