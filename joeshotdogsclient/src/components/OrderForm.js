@@ -28,6 +28,7 @@ export default function OrderForm({ obj = {} }) {
     if (obj.id) {
       setFormInput({
         id: obj.id,
+        userId: UID,
         cardNum: obj.cardNum,
         expiration: obj.expiration,
         nameOnCard: obj.nameOnCard,

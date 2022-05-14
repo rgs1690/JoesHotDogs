@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAllHotDogs, getHotDogById } from "../api/hotDogData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   createHotDogOrder,
   getHotDogOrderByOrderId,
 } from "../api/hotDogOrderData";
-import { getSingleOrder } from "../api/orderData";
+import { getOrdersByUserId, getSingleOrder, updateOrder } from "../api/orderData";
 import HDOCard from "./HDOCard";
+import getCurrentUsersUid from "../helpers/helpers";
 
-export default function CartForm({ obj = {} }) {
+export default function CartForm( ) {
   const [hotDogOrders, setHotDogOrders] = useState([]);
   const [newHDO, setHDO] = useState({});
   const [hotDogs, setHotDogs] = useState([]);
   const [order, setOrder] = useState({});
+  const [orders, setOrders] = [];
   const { id } = useParams();
+  const navigate = useNavigate();
+  const totalOrder = hotDogOrders.length * 5;
+  const UID = getCurrentUsersUid();
 
   useEffect(() => {
     getSingleOrder(id).then((order) => setOrder(order));
@@ -25,8 +30,8 @@ export default function CartForm({ obj = {} }) {
     getHotDogOrderByOrderId(id).then((hotDogOrders) => {
       setHotDogOrders(hotDogOrders);
     });
+   
   }, [newHDO]);
-  const totalOrder = hotDogOrders.length * 5;
   const handleAddDog = () => {
     console.log("sending");
     console.log(newHDO);
@@ -48,17 +53,34 @@ export default function CartForm({ obj = {} }) {
       });
     });
   };
+  const handleSubmit = (order) => {
+    updateOrder({
+      id: order.id,
+      userId: UID,
+      cardNum: order.cardNum,
+      expiration: order.expiration,
+      nameOnCard: order.nameOnCard,
+      billingZip: order.billingZip,
+      address: order.address,
+      phone: order.phone,
+      date: order.date,
+      total: totalOrder,
+      status: false,
+    delivery: order.delivery,
+    }).then(() => {
+        
+          navigate("/orders");
+        })
+
+  
+  };
 
   return (
     <>
       <div>
         <h2>Your Order # {order.id}</h2>
         {hotDogOrders?.map((hdo) => (
-          <HDOCard 
-          key={hdo.id}
-          hdo={hdo}
-          sethdos={setHotDogOrders}
-          />
+          <HDOCard key={hdo.id} hdo={hdo} sethdos={setHotDogOrders} />
         ))}
       </div>
       <div></div>
@@ -85,17 +107,21 @@ export default function CartForm({ obj = {} }) {
         </button>
       </div>
       <div>
-        <button type="button" className="btn btn-success">
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => handleSubmit(order)}
+        >
           Submit Order
         </button>
       </div>
     </>
   );
 }
-CartForm.propTypes = {
-  obj: PropTypes.shape({}),
-};
-CartForm.defaultProps = { obj: {} };
+// CartForm.propTypes = {
+//   obj: PropTypes.shape({}),
+// };
+// CartForm.defaultProps = { obj: {} };
 
 // add a submit order button that closes the order and hides the update and delete options and writes
 //closed on the order card.
