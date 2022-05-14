@@ -55,7 +55,7 @@ export default function CartForm( ) {
   const handleSubmit = (order) => {
     setOrder({
       ...order,
-      totat:totalOrder,
+      total:totalOrder,
       status: false
     })
     console.log(order)

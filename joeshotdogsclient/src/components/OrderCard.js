@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { deleteOrder } from "../api/orderData";
+import { deleteOrder, getOrdersByUserId } from "../api/orderData";
 import { getHotDogOrderByOrderId } from "../api/hotDogOrderData";
+import getCurrentUsersUid from "../helpers/helpers";
 
 export default function OrderCard({ order, setOrders }) {
   const [hdos, setHdos] = useState([]);
-
+  const UID = getCurrentUsersUid();
   const navigate = useNavigate();
   const handleClick = (method) => {
     if (method === "delete") {
-      deleteOrder(order.id).then(setOrders);
+      deleteOrder(order.id).then(() => {
+      getOrdersByUserId(UID) .then(setOrders)})
+     
+      
       console.log(order);
     } else if (method === "edit") {
       navigate(`/editOrder/${order.id}`);
