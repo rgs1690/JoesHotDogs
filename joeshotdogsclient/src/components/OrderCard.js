@@ -6,6 +6,7 @@ import { getHotDogOrderByOrderId } from "../api/hotDogOrderData";
 
 export default function OrderCard({ order, setOrders }) {
   const [hdos, setHdos] = useState([]);
+
   const navigate = useNavigate();
   const handleClick = (method) => {
     if (method === "delete") {
@@ -21,13 +22,13 @@ export default function OrderCard({ order, setOrders }) {
       setHdos(array);
     });
   }, []);
-
+  const totalOrder = hdos.length * 5;
   return (
     <>
       <div className="card">
         <div className="card-header">
           <h4 className="card-title">Order Number: {order.id}</h4>
-          <p className="card-text">Order Total: {order.total}</p>
+          <p className="card-text">Order Total: {totalOrder}</p>
           <p className="card-text">Date: {order.date}</p>
           {
             <>
@@ -41,7 +42,7 @@ export default function OrderCard({ order, setOrders }) {
           }  {
 
           }
-          <p className="card-text">Status: {order.status}</p>
+          {/*<p className="card-text">Status: {order.status}</p>*/}
           <p className="card-text">Delivery: {order.delivery}</p>
           <p className="card-text">Order Name: {order.nameOnCard}</p>
           <div>
