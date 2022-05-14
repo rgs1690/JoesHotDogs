@@ -23,12 +23,15 @@ export default function OrderCard({ order, setOrders }) {
     });
   }, []);
   const totalOrder = hdos.length * 5;
+ const maybeDelivery = () => {if (order.delivery === true) {
+   return 'YES'}
+else {return 'No'}}
   return (
     <>
       <div className="card">
         <div className="card-header">
           <h4 className="card-title">Order Number: {order.id}</h4>
-          <p className="card-text">Order Total: {totalOrder}</p>
+          <p className="card-text">Order Total: ${totalOrder}</p>
           <p className="card-text">Date: {order.date}</p>
           {
             <>
@@ -43,7 +46,7 @@ export default function OrderCard({ order, setOrders }) {
 
           }
           {/*<p className="card-text">Status: {order.status}</p>*/}
-          <p className="card-text">Delivery: {order.delivery}</p>
+          <p className="card-text">Delivery: {maybeDelivery()}</p>
           <p className="card-text">Order Name: {order.nameOnCard}</p>
           <div>
             <button
