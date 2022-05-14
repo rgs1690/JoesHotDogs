@@ -38,7 +38,7 @@ export default function OrderCard({ order, setOrders }) {
                   ))}
             </ul>
             </>
-          } ; {
+          }  {
 
           }
           <p className="card-text">Status: {order.status}</p>
