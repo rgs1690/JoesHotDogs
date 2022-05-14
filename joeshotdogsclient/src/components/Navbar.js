@@ -29,14 +29,11 @@ function Navbar() {
             <a className="nav-link" href="/Menu">
               Menu
             </a>
-            <a className="nav-link" href="/CartForm/9">
-              Cart
-            </a>
-                      <a className="nav-link" href="/Orders">
+
+            <a className="nav-link" href="/Orders">
               Orders
             </a>
-            <button className="btn btn-danger"
-            onClick={signOutUser}>
+            <button className="btn btn-danger" onClick={signOutUser}>
               Log Out
             </button>
           </div>

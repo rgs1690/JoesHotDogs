@@ -63,7 +63,7 @@ namespace JoesHotDogs.Controllers
             }
             else
             {
-                _orderRepo.UpdateOrder(match);
+                _orderRepo.UpdateOrder(order);
                 return Ok(order);
             }
             
