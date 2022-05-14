@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { deleteOrder } from "../api/orderData";
+import { getHotDogOrderByOrderId } from "../api/hotDogOrderData";
 
 export default function OrderCard({ order, setOrders }) {
+  const [hdos, setHdos] = useState([]);
   const navigate = useNavigate();
   const handleClick = (method) => {
     if (method === "delete") {
@@ -13,6 +15,13 @@ export default function OrderCard({ order, setOrders }) {
       navigate(`/editOrder/${order.id}`);
     }
   };
+
+  useEffect(() => {
+    getHotDogOrderByOrderId(order.id).then((array) => {
+      setHdos(array);
+    });
+  }, []);
+
   return (
     <>
       <div className="card">
@@ -20,6 +29,18 @@ export default function OrderCard({ order, setOrders }) {
           <h4 className="card-title">Order Number: {order.id}</h4>
           <p className="card-text">Order Total: {order.total}</p>
           <p className="card-text">Date: {order.date}</p>
+          {
+            <>
+            <p>Hotdogs:</p>
+            <ul>{
+                hdos?.map((hdo) => (
+                  <li key={hdo.id} >{hdo.hotDogName}</li>
+                  ))}
+            </ul>
+            </>
+          } ; {
+
+          }
           <p className="card-text">Status: {order.status}</p>
           <p className="card-text">Delivery: {order.delivery}</p>
           <p className="card-text">Order Name: {order.nameOnCard}</p>
